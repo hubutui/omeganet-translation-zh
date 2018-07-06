@@ -1,0 +1,45 @@
+\input{./figures/omega-net-architecture-zh.tex}
+
+二维静态图像序列（SSFP, steady state free precession）的左心和四腔心分割是进行容量估计（如射血分数，每搏量和心输出量）；形态学特征（如心肌质地，壁厚等）和应力分析\citep{Peng2016}前的必要步骤．
+然而，心脏的全自动分割依然是一个棘手的问题，主要是因为：
+
+\begin{itemize}
+\item 心脏大小、方向以及形态学上的生物差异．
+\item 不同扫描仪器、流程和临床切面的对比度和外观差异．
+\item 心内膜小梁和乳头肌的影响．
+\item 心室心房之间以及心腔和血管之间的模糊边界
+\end{itemize}
+
+解决上述问题常用的有三种方法．
+第一，对问题的范围进行限定，例如只对 SA 切面的左心肌和血池进行分割．
+第二，增加用户交互，提供有效的初始化，额外的解剖标记或者错误修正．
+第三，将心脏结构的先验知识融合到模型中．
+显然，这些方法都不够理想：第一种方法限制了算法能够学习到的信息；第二种方法增加了医生的劳动；而第三种方法需要更加小心的设计算法． 
+
+近来，深度神经网络\hl{CNNs}在自然图像分类\hl{\citep{Krizhevsky2012,Simonyan2015}}和分割\citep{Long2015,Noh2015,Yu2016}以及生物医学图像分析\citep{Ronneberger2015,Xie2015}取得瞩目的成就．
+已有研究将 CNN 分割应用到短轴切面 CMR 图像的左室血池（\citep{Tan2016,Poudel2016a,Tan2017}），右室血池（\citep{Luo2016}），以及同时对前述两者分割（\citep{Tran2016,Lieman-Sifry2017,Vigneault2017}）．
+这些方法要么定位和分割是分别进行\citep{Tan2016, Poudel2016a, Tan2017, Luo2016}，要么是预先对图像进行裁剪，使得心脏就在图像中央，并占图像的主要部分，从而避开了定位任务\hl{\citep{Tran2016, Lieman-Sifry2017, Vigneault2017}}．他们都没有做端到端的定位和分割，也没有先变换到一个典型方向再做分割．
+
+\input{./figures/canonical-orientation-zh.tex}
+
+\hl{
+在深度学习领域，CNN 网络的不变性仅仅是来自平均化池化和最大化池化的组合．
+然而，卷积或者相关操作有几个缺陷：它既不是旋转不变或等变的，也不是尺度不变的，因此需要需要大量的数据来表示这些可能的变化 \citep{Sifre2013, Dieleman2015}．
+}
+在本文中，我们提出 \omeganet{}（Omega-Net），一个全新的 CNN 网络架构，来解决这三个问题（图 \ref{fig:omega-net-architecture}）.
+
+简单起见，尽管更加复杂的网络，例如 ResNet \citep{He2016} 也可以使用，我们还是使用 \UNet{} 作为粗分割和细分割的组成模块 \citep{Ronneberger2015}．
+受空间变换网络 \citep{Jaderberg2015} 的启发，我们设计了一个完全不同的网络来实现定位和变换到一个典型方向的功能．
+
+变换后的图像被送入一个由沙漏形网络堆叠而成的细分割网络 \citep{Newell2016}．
+\hl{
+在这样一个堆叠的沙漏形网络中，多个 \UNet{} 模块完成分割，并将输出传到下一个 \UNet{} 中．
+这样的结构已经被证明可以逐渐降低误差，提升准确率 \citep{Newell2016}．
+}
+
+我们展示了 \omeganet{} 可以进行全自动的分割出三个标准切面（SA，短轴面；4C，四腔心面；2C，两腔心面）中的五个前景类别（左室心肌，左右心房和左右心室），参见图 \ref{fig:canonical-orientation}．
+而且，我们的网络在多中心点的患者上测试，这些患者患有肥厚性心肌病（\HCM{}）．这大大增加了问题的难度与复杂性，因为左室的巨大差异．
+网络性能，以 \IoU{} 计算，比起没有使用定位和方向变换的 \UNet{} 分割结果有明显的提升（$0.858$ vs $0.834$）．
+\hl{
+此外，我们在 2017 MICCAI 自动心脏病诊断挑战公开数据集上(\miccaidata{}) dataset,\footnote{\url{https://www.creatis.insa-lyon.fr/Challenge/acdc/}}从头开始训练，并取得了比现有结果\citep{Isensee2018}更好的成绩，仅有左室心肌的分割略差．
+}

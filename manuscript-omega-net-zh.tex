@@ -1,0 +1,153 @@
+%\documentclass[review]{elsarticle}
+\documentclass[final,5p]{elsarticle}
+%\documentclass[authoryear]{elsarticle}
+
+\usepackage[draft]{hyperref}
+\usepackage{lineno,amssymb,bm,amsmath,caption,subcaption,booktabs,rotating,tikz,cleveref,gensymb}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage[percent]{overpic}
+\usepackage[export]{adjustbox}
+\usepackage[normalem]{ulem}
+\usepackage{dvmacros}
+%\modulolinenumbers[100]
+\nolinenumbers
+\newcommand\hl[1]{%
+  \bgroup
+  \hskip0pt\color{black!80!black}%
+  #1%
+  \egroup
+}
+\let\linenumbers\nolinenumbers\nolinenumbers
+\journal{Medical Image Analysis}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Elsevier bibliography styles %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\usepackage{numcompress}
+%\bibliographystyle{model3-num-names}
+\bibliographystyle{model4-names}
+\biboptions{authoryear}
+%\bibliographystyle{elsarticle-num}
+%\bibliographystyle{elsarticle-num-names}
+%\bibliographystyle{elsarticle-harv}
+%\bibliographystyle{plain}
+%\bibliographystyle{alpha}
+%\bibliographystyle{amsplain}
+%\bibliographystyle{amsalpha}
+
+\usepackage{ctex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+\input{statistics.tex}
+\input{./data/table_2_stats.tex}
+\input{./data/model-params.tex}
+
+\begin{frontmatter}
+
+\title{\omeganet{} \hl{(Omega-Net)}: 利用深度卷积神经网络进行全自动的多切面的心脏 MR 图像检测、取向和定位}
+
+\author[oxford,nih,tufts]{Davis M. Vigneault\corref{mycorrespondingauthor}}
+\ead{davis.vigneault@gmail.com}
+
+\author[oxford]{Weidi Xie\corref{mycorrespondingauthor}}
+\author[brigham]{Carolyn Y. Ho}
+\author[wisc]{David A. Bluemke}
+\author[oxford]{J. Alison Noble}
+
+\address[oxford]{Institute of Biomedical Engineering, Department of Engineering, University of Oxford}
+\address[nih]{Department of Radiology and Imaging Sciences, Clinical Center, National Institutes of Health}
+\address[tufts]{Tufts University School of Medicine, Sackler School of Graduate Biomedical Sciences}
+\address[brigham]{Cardiovascular Division, Brigham and Women's Hospital}
+\address[wisc]{University of Wisconsin-Madison, School of Medicine and Public Health}
+
+\cortext[mycorrespondingauthor]{These authors contributed equally to this work.}
+
+\begin{abstract}
+
+\input{./text/abstract-zh}
+
+\end{abstract}
+
+\begin{keyword}
+心脏核磁共振 \sep 语义分割 \sep 深度卷积神经网络 \sep 空间变换网络
+\MSC[2010] 00-01\sep  99-00
+\end{keyword}
+
+\end{frontmatter}
+
+\linenumbers
+
+\newcommand{\figdir}{./figures/}
+\newcommand{\tabdir}{./tables/}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Introduction
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{介绍} \label{introduction}
+
+\input{./text/introduction-zh.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Methods
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{方法} \label{methods}
+
+\input{./text/methods-zh.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Experiments
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{实验} \label{experiments}
+
+\input{./text/experiments-zh.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Results
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{结果} \label{results}
+
+\input{./text/results-zh.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Discussion
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{讨论} \label{discussion}
+
+\input{./text/discussion-zh.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Summary
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{总结} \label{summary}
+
+\input{./text/summary-zh.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Acknowledgements
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{致谢} \label{acknowledgements}
+
+\input{./text/acknowledgements-zh.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% References
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{参考文献} \label{references}
+
+\bibliography{citations}
+
+\end{document}
+

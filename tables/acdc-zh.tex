@@ -1,0 +1,34 @@
+\renewcommand{\captiontitle}{在 2017 MICCIA \miccaidata{} 数据集上的分割准确率}
+\begin{table*}
+\hl{
+\begin{center}
+\begin{tabular}{lccc} \hline
+\toprule
+结构           & 左室血池 & 右室血池 & 左室心肌 \\
+\midrule
+\multicolumn{4}{c}{Jaccard 系数（\IoU{}）} \\
+\midrule
+\omeganet{}         & \textbf{\ACDCONJLVBP{}}  & \textbf{\ACDCONJRVBP{}}  & \ACDCONJLVMY{}           \\
+\citet{Isensee2018} & \ACDCFINJLVBP{}          & \ACDCFINJRVBP{}          & \textbf{\ACDCFINJLVMY{}} \\
+\citet{Isensee2017} & \ACDCFIOJLVBP{}          & \ACDCFIOJRVBP{}          & \ACDCFIOJLVMY{}          \\
+\midrule
+\multicolumn{4}{c}{Dice 系数} \\
+\midrule
+\omeganet{}         & \textbf{\ACDCONDLVBP{}}  & \textbf{\ACDCONDRVBP{}}  & \ACDCONDLVMY{}           \\
+\citet{Isensee2018} & \ACDCFINDLVBP{}          & \ACDCFINDRVBP{}          & \textbf{\ACDCFINDLVMY{}} \\
+\citet{Isensee2017} & \ACDCFIODLVBP{}          & \ACDCFIODRVBP{}          & \ACDCFIODLVMY{}          \\
+\bottomrule
+\end{tabular}
+\caption[\captiontitle{}]{
+\hl{
+\captiontitle{}.
+\miccaidata{} 挑战的分割准确率用 Dice 系数计算，其他的地方使用 \IoU{} 计算；因此这里把两个都计算出来了．
+（提示，$\mathrm{Dice} = 2 * \mathrm{\IoU{}} / (1 + \mathrm{\IoU{}})$）
+我们给出了 \omeganet{} 网络 B 的结果；\citet{Isensee2017} 发表在 STACOM 上的结果；以及 \citet{Isensee2018} 在 \url{arxiv.org} 上预发表的结果．
+每一前景类别的最佳结果用加粗字体标出．
+}
+}
+\label{tab:acdc}
+\end{center}
+}
+\end{table*}

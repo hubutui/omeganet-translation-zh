@@ -1,0 +1,39 @@
+% {A,B,C,D}{S,H,V}{M,H,L}{Ze,On,Tw,Th}
+% {Network}{View}{Quartile}{Hourglass}
+\renewcommand{\captiontitle}{网络性能评估}
+\begin{sidewaystable*}
+\begin{center}
+\begin{tabular}{ccccccc} \hline
+\toprule
+名称      & View   & \UNet{} 0                 & \UNet{} 1                 & \UNet{} 2                 & \UNet{} 3                 \\
+\midrule
+网络 A & All    & $\AAMZe~[\AALZe,~\AAHZe]$ & --                        & --                        & --                        \\
+          & \SA{}  & $\ASMZe~[\ASLZe,~\ASHZe]$ & --                        & --                        & --                        \\
+          & \HLA{} & $\AHMZe~[\AHLZe,~\AHHZe]$ & --                        & --                        & --                        \\
+          & \VLA{} & $\AVMZe~[\AVLZe,~\AVHZe]$ & --                        & --                        & --                        \\
+\midrule
+网络 B & All    & $\BAMZe~[\BALZe,~\BAHZe]$ & $\BAMOn~[\BALOn,~\BAHOn]$ & --                        & --                        \\
+          & \SA{}  & $\BSMZe~[\BSLZe,~\BSHZe]$ & $\BSMOn~[\BSLOn,~\BSHOn]$ & --                        & --                        \\
+          & \HLA{} & $\BHMZe~[\BHLZe,~\BHHZe]$ & $\BHMOn~[\BHLOn,~\BHHOn]$ & --                        & --                        \\
+          & \VLA{} & $\BVMZe~[\BVLZe,~\BVHZe]$ & $\BVMOn~[\BVLOn,~\BVHOn]$ & --                        & --                        \\
+\midrule
+网络 C & All    & $\CAMZe~[\CALZe,~\CAHZe]$ & $\CAMOn~[\CALOn,~\CAHOn]$ & $\CAMTw~[\CALTw,~\CAHTw]$ & --                        \\
+          & \SA{}  & $\CSMZe~[\CSLZe,~\CSHZe]$ & $\CSMOn~[\CSLOn,~\CSHOn]$ & $\CSMTw~[\CSLTw,~\CSHTw]$ & --                        \\
+          & \HLA{} & $\CHMZe~[\CHLZe,~\CHHZe]$ & $\CHMOn~[\CHLOn,~\CHHOn]$ & $\CHMTw~[\CHLTw,~\CHHTw]$ & --                        \\
+          & \VLA{} & $\CVMZe~[\CVLZe,~\CVHZe]$ & $\CVMOn~[\CVLOn,~\CVHOn]$ & $\CVMTw~[\CVLTw,~\CVHTw]$ & --                        \\
+\midrule
+网络 D & All    & $\DAMZe~[\DALZe,~\DAHZe]$ & $\DAMOn~[\DALOn,~\DAHOn]$ & $\DAMTw~[\DALTw,~\DAHTw]$ & $\DAMTh~[\DALTh,~\DAHTh]$ \\
+          & \SA{}  & $\DSMZe~[\DSLZe,~\DSHZe]$ & $\DSMOn~[\DSLOn,~\DSHOn]$ & $\DSMTw~[\DSLTw,~\DSHTw]$ & $\DSMTh~[\DSLTh,~\DSHTh]$ \\
+          & \HLA{} & $\DHMZe~[\DHLZe,~\DHHZe]$ & $\DHMOn~[\DHLOn,~\DHHOn]$ & $\DHMTw~[\DHLTw,~\DHHTw]$ & $\DHMTh~[\DHLTh,~\DHHTh]$ \\
+          & \VLA{} & $\DVMZe~[\DVLZe,~\DVHZe]$ & $\DVMOn~[\DVLOn,~\DVHOn]$ & $\DVMTw~[\DVLTw,~\DVHTw]$ & $\DVMTh~[\DVLTh,~\DVHTh]$ \\
+\bottomrule
+\end{tabular}
+\caption[\captiontitle{}]{\captiontitle{}.
+\hl{
+表中列出了所有的切面以及所有网络的加权的前景 \IoU{}，并给出了四分位数范围的中值．
+}
+\SA{} 切面的网络性能变现最佳，\HLA{} 切面最差，但是他们的差异并不大．
+}
+\label{tab:architectureaccuracy}
+\end{center}
+\end{sidewaystable*}

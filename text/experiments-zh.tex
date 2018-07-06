@@ -1,0 +1,71 @@
+
+\subsection{\hl{HCMNet 数据集}}
+
+\input{./tables/architecture-descriptions-zh.tex}
+
+HCMNet 数据集包含 \NumPtT{} 个样本，其中 \NumPtO{} 个患有肥厚性心肌病，\NumPtC{} 为健康人 \citep{Ho2017}．
+心脏核磁共振 \CMR{} 检查由十个临床中心于 2009 到 2011 年期间按照标准流程进行．
+其中九个使用 1.5-T 核磁共振，一个使用 3-T 核磁共振．
+我们采集了三个 \SA{} 切面，一个 \HLA{} 切面和一个 \VLA{} 切面的 \SSFP{} 序列．
+\hl{
+图像的平面间隔为 $\SpacingMU{} \pm \SpacingSD{}$mm，尺寸为 $\MatrixMU{} \pm \MatrixSD{}$ 像素；更加详细的信息可以参考文献 \citet{Ho2017} 的补充材料．
+}
+
+左室心肌和其他所有四个心腔都在 \SA{}，\HLA{} 和 \VLA{} 切面进行手动分割标注（应当注意到，并不是所有的类别都可以在 \SA{} 和 \VLA{} 切面看到）．
+\hl{
+\ND{2} 时间卷数据会送入 ITK-Snap \citep{Yushkevich2006} 中去；每隔五帧做一个手动的分割标注，而剩余的图像的标注由插值算法自动产生．（分割由本文第一作者完成，他有有着五年的手动分割标注 \CMR{} 的经验）．
+}
+\LV{} 和 \RV{} 切面的心肌不包含乳头肌和小梁．
+
+每一卷数据数据都被适当地裁剪或者补零到 $\N \times \N$ 的空间尺寸，而时间轴的范围为 $\NumFramesMin{}$ 到 $\NumFramesMax{}$ 帧．
+不均匀的背景光照均做了修正，然后进行直方图均衡处理．
+每一个单独的图像都做了归一化处理，也就是减去均值再除以标准差，然后在送入 \CNN{} 网络．
+
+\subsubsection{训练与交叉验证}
+
+至于交叉验证，所有的被试分成了三份（$\NumImFoldA{}$，$\NumImFoldB{}$，$\NumImFoldC{}$ 张图），并确保属于一个被试者的图像都分到了同一组中．
+每一个网络（见表 \ref{tab:architecture-descriptions}）都在其中两组中训练，然后在剩下那组进行测试，且包括所有的组合．
+\hl{
+网络 A 仅有粗分割模块；考虑到 \UNet{} 在生物医学图像分割任务中表现不错，这就是个基线水平．
+网络 B、C 和 D 分别为细分割模块使用 1、2 和 3 个 \UNet{} 模块的 \omeganet{} 网络．
+}
+
+网络使用正交化的权重 \hl{\citep{Saxe2013}} 初始化，并使用 Adam 优化器 \citep{Kingma2015} 优化．
+学习率初始化为 $0.001$，并每隔 $26$ 代衰减为原来的 $0.1$．
+为了避免过拟合，我们使用数据增强（平移和缩放 $\pm \AugTrans{}\%$；旋转 $\pm \AugRot{}$\degree），并设置粗分割模块的权重衰减系数为 $\weightdecay{}$．
+值得注意的是，数据增强也\emph{隐含}在最后的细分割模块，因为前面用了变换网络．我们还对每一时间序列做了单独的数据增强．
+
+\subsubsection{性能评价指标}
+
+我们计算每一图像的预测值与真实值之间的加权的 \IoU{} 来衡量网络性能．
+对于二值图像（只有一个前景和一个背景）来说，真实值 $I_T$ 和预测值 $I_P$ 的 \IoU{}（也称 Jaccard 系数）定义为：
+
+\begin{equation}
+\IoU{} \left( I_T, I_P \right) = \frac{|I_T \cap I_P|}{|I_T \cup I_P|},
+\end{equation}
+
+\noindent 注意，在代码实现中应给分母加上一个较小的数字，以避免除以零的情况．
+为了将 \IoU{} 扩展到多类的情况，我们先分别计算每一类与背景的 \IoU{}．
+然后计算一个加权的 \IoU{}，其中的权值由这些类别占所有类别的比重决定，也就是求出了一个加权的均值前景 \IoU{}．
+
+\subsubsection{实现}
+
+这个模型使用 Tensorflow \hl{\citep{Chollet2015,Abadi2016}} 的 Keras 接口，用 Python 语言实现，并使用一块 12 GB 显存的英伟达 Titan X 图形处理器（GPU）训练．
+所有的网络在训练中都需要大约 20 分钟迭代一次．
+而在测试阶段，网络预测出分割结果的速度大约在 15 帧每秒．
+
+\hl{
+\subsection{2017 MICCAI \miccaidata{} 数据集}
+
+网络 B 从头开始在 2017 MICCAI \miccaidata{} 数据集上训练．
+训练数据包含 100 个患者（20 个正常，20 个心肌梗塞，20 个扩张型心肌病 20 个肥厚性心肌病和 20 个右室心脏病）的 \SA{} 切面数据．
+
+所有切片的数据都提供了舒张末期和收缩末期左室心肌，左室血池和右室血池的真实分割标签
+为了能与 \miccaidata{} 的结果进行对比，网络的性能评估同时使用了 \IoU{} 和 Dice 系数：
+
+\begin{equation}
+\mathrm{Dice} \left( I_T, I_P \right) = \frac{2|I_T \cap I_P|}{|I_T| + |I_P|},
+\end{equation}
+
+\noindent 根据目前最优的结果 \citep{Isensee2017,Isensee2018}，网络使用了五折交叉验证来训练．
+}

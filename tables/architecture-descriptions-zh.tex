@@ -1,0 +1,24 @@
+\renewcommand{\captiontitle}{考虑中的 \CNN{} 网络结构变体}
+\begin{table*}
+\begin{center}
+\begin{tabular}{lrrrrr} \hline
+\toprule
+名称      & \UNet{} 0 & \UNet{} 1 & \UNet{} 2 & \UNet{} 3 & 参数量（百万） \\
+\midrule
+网络 A & 128       & --        & --        & --        & \MillionsOfParamsA{} \\
+网络 B & 64        & 64        & --        & --        & \MillionsOfParamsB{} \\
+网络 C & 64        & 64        & 64        & --        & \MillionsOfParamsC{} \\
+网络 D & 64        & 64        & 64        & 64        & \MillionsOfParamsD{} \\
+\bottomrule
+\end{tabular}
+\caption[\captiontitle{}]{
+\captiontitle{}.
+\hl{
+网络 A 是一个基线 \UNet{}（仅有粗分割模块，不含变换或者细分割模块）．
+网络 B、C 和 D 是细分割模块中分别有着 1、2和3个 \UNet{} 结构的完整的 \omeganet{} 网络结构．
+表中还给出了每一个 \UNet{} 模块的特征向量长度．
+}
+}
+\label{tab:architecture-descriptions}
+\end{center}
+\end{table*}
