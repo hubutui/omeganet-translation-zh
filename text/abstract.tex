@@ -1,0 +1,14 @@
+
+Pixelwise segmentation of the left ventricular (\LV{}) myocardium and the four cardiac chambers in \ND{2} steady state free precession (\SSFP{}) cine sequences is an essential preprocessing step for a wide range of analyses.
+Variability in contrast, appearance, orientation, and placement of the heart between patients, clinical views, scanners, and protocols makes fully automatic semantic segmentation a notoriously difficult problem.
+Here, we present \omeganet{} (Omega-Net): a novel convolutional neural network (\CNN{}) architecture for simultaneous \hl{localization}, transformation into a canonical orientation, and semantic segmentation.
+First, an \hl{initial} segmentation is performed on the input image; second, the features learned during this \hl{initial} segmentation are used to predict the parameters needed to transform the input image into a canonical orientation; and third, a \hl{final} segmentation is performed on the transformed image.
+In this work, \omeganet{}s of varying depths were trained to detect five foreground classes in any of three clinical views (short axis, \SA{}; four-chamber, \HLA{}; two-chamber, \VLA{}), without prior knowledge of the view being segmented.
+This constitutes a substantially more challenging problem compared with prior work.
+The architecture was trained on a cohort of patients with hypertrophic cardiomyopathy (\HCM{}, $N = \NumPtO{}$) and healthy control subjects ($N = \NumPtC{}$).
+Network performance\hl{,} as measured by weighted foreground intersection-over-union (\IoU{})\hl{,} was substantially improved for the best-performing \omeganet{} compared with \UNet{} segmentation without \hl{localization} or orientation ($0.858$ vs $0.834$).
+\hl{
+In addition, to be comparable with other works, \omeganet{} \hl{was retrained} from scratch on the publicly available 2017 MICCAI Automated Cardiac Diagnosis Challenge (\miccaidata{}) dataset.
+The \omeganet{} outperformed the state-of-the-art method in segmentation of the \LV{} and \RV{} bloodpools, and performed slightly worse in segmentation of the \LV{} myocardium.
+We conclude that} this architecture represents a substantive advancement over prior approaches, with implications for biomedical image segmentation more generally.
+

@@ -1,0 +1,151 @@
+%\documentclass[review]{elsarticle}
+\documentclass[final,5p]{elsarticle}
+%\documentclass[authoryear]{elsarticle}
+
+\usepackage[draft]{hyperref}
+\usepackage{lineno,amssymb,bm,amsmath,caption,subcaption,booktabs,rotating,tikz,cleveref,gensymb}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage[percent]{overpic}
+\usepackage[export]{adjustbox}
+\usepackage[normalem]{ulem}
+\usepackage{dvmacros}
+%\modulolinenumbers[100]
+\nolinenumbers
+\newcommand\hl[1]{%
+  \bgroup
+  \hskip0pt\color{black!80!black}%
+  #1%
+  \egroup
+}
+\let\linenumbers\nolinenumbers\nolinenumbers
+\journal{Medical Image Analysis}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Elsevier bibliography styles %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\usepackage{numcompress}
+%\bibliographystyle{model3-num-names}
+\bibliographystyle{model4-names}
+\biboptions{authoryear}
+%\bibliographystyle{elsarticle-num}
+%\bibliographystyle{elsarticle-num-names}
+%\bibliographystyle{elsarticle-harv}
+%\bibliographystyle{plain}
+%\bibliographystyle{alpha}
+%\bibliographystyle{amsplain}
+%\bibliographystyle{amsalpha}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+\input{statistics.tex}
+\input{./data/table_2_stats.tex}
+\input{./data/model-params.tex}
+
+\begin{frontmatter}
+
+\title{\omeganet{} \hl{(Omega-Net)}: Fully Automatic, Multi-View Cardiac MR Detection, Orientation, and Segmentation with Deep Neural Networks}
+
+\author[oxford,nih,tufts]{Davis M. Vigneault\corref{mycorrespondingauthor}}
+\ead{davis.vigneault@gmail.com}
+
+\author[oxford]{Weidi Xie\corref{mycorrespondingauthor}}
+\author[brigham]{Carolyn Y. Ho}
+\author[wisc]{David A. Bluemke}
+\author[oxford]{J. Alison Noble}
+
+\address[oxford]{Institute of Biomedical Engineering, Department of Engineering, University of Oxford}
+\address[nih]{Department of Radiology and Imaging Sciences, Clinical Center, National Institutes of Health}
+\address[tufts]{Tufts University School of Medicine, Sackler School of Graduate Biomedical Sciences}
+\address[brigham]{Cardiovascular Division, Brigham and Women's Hospital}
+\address[wisc]{University of Wisconsin-Madison, School of Medicine and Public Health}
+
+\cortext[mycorrespondingauthor]{These authors contributed equally to this work.}
+
+\begin{abstract}
+
+\input{./text/abstract}
+
+\end{abstract}
+
+\begin{keyword}
+cardiac magnetic resonance \sep semantic segmentation \sep deep convolutional neural networks \sep spatial transformer networks
+\MSC[2010] 00-01\sep  99-00
+\end{keyword}
+
+\end{frontmatter}
+
+\linenumbers
+
+\newcommand{\figdir}{./figures/}
+\newcommand{\tabdir}{./tables/}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Introduction
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introduction} \label{introduction}
+
+\input{./text/introduction.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Methods
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Methods} \label{methods}
+
+\input{./text/methods.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Experiments
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Experiments} \label{experiments}
+
+\input{./text/experiments.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Results
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Results} \label{results}
+
+\input{./text/results.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Discussion
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Discussion} \label{discussion}
+
+\input{./text/discussion.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Summary
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Summary} \label{summary}
+
+\input{./text/summary.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Acknowledgements
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Acknowledgements} \label{acknowledgements}
+
+\input{./text/acknowledgements.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% References
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{References} \label{references}
+
+\bibliography{citations}
+
+\end{document}
+

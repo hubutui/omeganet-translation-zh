@@ -1,0 +1,25 @@
+\renewcommand{\captiontitle}{\CNN{} architecture variants considered}
+\begin{table*}
+\begin{center}
+\begin{tabular}{lrrrrr} \hline
+\toprule
+Name      & \UNet{} 0 & \UNet{} 1 & \UNet{} 2 & \UNet{} 3 & Millions of Parameters \\
+\midrule
+Network A & 128       & --        & --        & --        & \MillionsOfParamsA{} \\
+Network B & 64        & 64        & --        & --        & \MillionsOfParamsB{} \\
+Network C & 64        & 64        & 64        & --        & \MillionsOfParamsC{} \\
+Network D & 64        & 64        & 64        & 64        & \MillionsOfParamsD{} \\
+\bottomrule
+\end{tabular}
+\caption[\captiontitle{}]{
+\captiontitle{}.
+\hl{
+Network A is the baseline \UNet{} (the \hl{initial} segmentation module alone, without transformation or \hl{final} segmentation modules).
+Networks B, C, and D are full \omeganet{} architectures with 1, 2, and 3 \UNet{} components, respectively, in the fine-grained segmentation module.
+\UNet{} 0 is the \UNet{} in the \hl{initial} segmentation module; \UNet{}s 1, 2, and 3 are the first, second, and third \UNet{} components in the \hl{final} segmentation module, as applicable.
+For each \UNet{} component of each network variant, the length of the feature vector is provided.
+}
+}
+\label{tab:architecture-descriptions}
+\end{center}
+\end{table*}

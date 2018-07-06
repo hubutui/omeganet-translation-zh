@@ -1,0 +1,39 @@
+% {A,B,C,D}{S,H,V}{M,H,L}{Ze,On,Tw,Th}
+% {Network}{View}{Quartile}{Hourglass}
+\renewcommand{\captiontitle}{Network performance with reference to ground truth}
+\begin{sidewaystable*}
+\begin{center}
+\begin{tabular}{ccccccc} \hline
+\toprule
+Name      & View   & \UNet{} 0                 & \UNet{} 1                 & \UNet{} 2                 & \UNet{} 3                 \\
+\midrule
+Network A & All    & $\AAMZe~[\AALZe,~\AAHZe]$ & --                        & --                        & --                        \\
+          & \SA{}  & $\ASMZe~[\ASLZe,~\ASHZe]$ & --                        & --                        & --                        \\
+          & \HLA{} & $\AHMZe~[\AHLZe,~\AHHZe]$ & --                        & --                        & --                        \\
+          & \VLA{} & $\AVMZe~[\AVLZe,~\AVHZe]$ & --                        & --                        & --                        \\
+\midrule
+Network B & All    & $\BAMZe~[\BALZe,~\BAHZe]$ & $\BAMOn~[\BALOn,~\BAHOn]$ & --                        & --                        \\
+          & \SA{}  & $\BSMZe~[\BSLZe,~\BSHZe]$ & $\BSMOn~[\BSLOn,~\BSHOn]$ & --                        & --                        \\
+          & \HLA{} & $\BHMZe~[\BHLZe,~\BHHZe]$ & $\BHMOn~[\BHLOn,~\BHHOn]$ & --                        & --                        \\
+          & \VLA{} & $\BVMZe~[\BVLZe,~\BVHZe]$ & $\BVMOn~[\BVLOn,~\BVHOn]$ & --                        & --                        \\
+\midrule
+Network C & All    & $\CAMZe~[\CALZe,~\CAHZe]$ & $\CAMOn~[\CALOn,~\CAHOn]$ & $\CAMTw~[\CALTw,~\CAHTw]$ & --                        \\
+          & \SA{}  & $\CSMZe~[\CSLZe,~\CSHZe]$ & $\CSMOn~[\CSLOn,~\CSHOn]$ & $\CSMTw~[\CSLTw,~\CSHTw]$ & --                        \\
+          & \HLA{} & $\CHMZe~[\CHLZe,~\CHHZe]$ & $\CHMOn~[\CHLOn,~\CHHOn]$ & $\CHMTw~[\CHLTw,~\CHHTw]$ & --                        \\
+          & \VLA{} & $\CVMZe~[\CVLZe,~\CVHZe]$ & $\CVMOn~[\CVLOn,~\CVHOn]$ & $\CVMTw~[\CVLTw,~\CVHTw]$ & --                        \\
+\midrule
+Network D & All    & $\DAMZe~[\DALZe,~\DAHZe]$ & $\DAMOn~[\DALOn,~\DAHOn]$ & $\DAMTw~[\DALTw,~\DAHTw]$ & $\DAMTh~[\DALTh,~\DAHTh]$ \\
+          & \SA{}  & $\DSMZe~[\DSLZe,~\DSHZe]$ & $\DSMOn~[\DSLOn,~\DSHOn]$ & $\DSMTw~[\DSLTw,~\DSHTw]$ & $\DSMTh~[\DSLTh,~\DSHTh]$ \\
+          & \HLA{} & $\DHMZe~[\DHLZe,~\DHHZe]$ & $\DHMOn~[\DHLOn,~\DHHOn]$ & $\DHMTw~[\DHLTw,~\DHHTw]$ & $\DHMTh~[\DHLTh,~\DHHTh]$ \\
+          & \VLA{} & $\DVMZe~[\DVLZe,~\DVHZe]$ & $\DVMOn~[\DVLOn,~\DVHOn]$ & $\DVMTw~[\DVLTw,~\DVHTw]$ & $\DVMTh~[\DVLTh,~\DVHTh]$ \\
+\bottomrule
+\end{tabular}
+\caption[\captiontitle{}]{\captiontitle{}.
+\hl{
+Weighted foreground \IoU{} for each network variant is calculated for all views combined and for each view separately, and is reported as median [interquartile range].
+}
+Network performance was highest in the \SA{} view and lowest in the \HLA{} view, though these differences are small.
+}
+\label{tab:architectureaccuracy}
+\end{center}
+\end{sidewaystable*}

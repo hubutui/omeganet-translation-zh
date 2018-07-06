@@ -1,0 +1,73 @@
+
+\subsection{\hl{HCMNet dataset}}
+
+\input{\tabdir architecture-descriptions.tex}
+
+The \hl{HCMNet dataset} consisted of \NumPtT{} subjects: \NumPtO{} patients with overt hypertrophic cardiomyopathy (\HCM{}) and \NumPtC{} healthy control subjects \hl{\citep{Ho2017}}.
+\CMR{} was performed with a standardized protocol at 10 \hl{clinical sites} from 2009 to 2011.
+Nine centers used 1.5-T magnets, and one used a 3-T magnet.
+Where available, three \SA{} (basal, equatorial, and apical), one \HLA{}, and one \VLA{} \SSFP{} cine series were obtained.
+\hl{
+Images had an in-plane spacing of $\SpacingMU{} \pm \SpacingSD{}$mm and matrix size of $\MatrixMU{} \pm \MatrixSD{}$ pixels; further details concerning the \CMR{} acquisition are given in the supplement to \citet{Ho2017}.
+}
+
+The \LV{} myocardium, and all four cardiac chambers were manually segmented the \SA{}, \HLA{}, and \VLA{} views (noting that not all classes are visible in the \SA{} and \VLA{} views).
+\hl{
+\ND{2}+time volumes were loaded into ITK-Snap \citep{Yushkevich2006}; every fifth frame was segmented manually, and the remaining frames were automatically interpolated.
+(Segmentation was performed by the first author, with five years experience in manual \CMR{} segmentation).
+}
+The papillary muscles and the trabeculation of the \LV{} and \RV{} were excluded from the myocardium.
+
+Each volume was cropped or padded as appropriate to $\N \times \N$ pixels in the spatial dimensions, and varied from $\NumFramesMin{}$ to $\NumFramesMax{}$ frames in the time dimension.
+Nonuniform background illumination was corrected by dividing by an estimated illumination field, and background corrected images were histogram equalized.
+Each individual image was normalized to zero mean and unit standard deviation before being input into the \CNN{}.
+
+\subsubsection{Training and cross-validation}
+
+For cross-validation, the subjects were partitioned into three folds of approximately equal size ($\NumImFoldA{}$, $\NumImFoldB{}$, and $\NumImFoldC{}$ images, respectively) such that the images from any one subject were present in one fold only.
+Each of the four architectures (Table~\ref{tab:architecture-descriptions}) were trained on all three combinations of two folds and tested on the remaining fold.
+\hl{
+Network A was the \hl{initial} segmentation module alone; since the \UNet{} was performed well in biomedical image segmentation tasks, this was regarded as a strong baseline.
+Networks B, C, and D were \omeganet{} architectures with 1, 2, and 3, \UNet{} components in the \hl{final} segmentation module.
+}
+
+The networks were initialized with orthogonal weights \hl{\citep{Saxe2013}}, and were optimized using Adam \hl{optimization} \citep{Kingma2015} by minimizing categorical cross-entropy.
+The learning rate was initialized to $0.001$ and decayed by $0.1$ every $26$ epochs.
+To avoid over-fitting, data augmentation (translations and scaling $\pm \AugTrans{}\%$ of the image width; rotations $\pm \AugRot{}$\degree) and a weight decay of $\weightdecay{}$ was \hl{applied to the input to the initial segmentation module.
+Notably, data augmentation is performed \emph{implicitly} in the final segmentation module, due to the fact that the predicted transformation parameters are random early in training.
+Note also that data augmentation was performed independently for each time frame.
+}
+
+\subsubsection{Measure of performance}
+
+Weighted foreground intersection-over-union (\IoU{}) was calculated \hl{image-by-image} between the prediction and manual segmentations.
+For a binary image (one foreground class, one background class), \IoU{} (also known as the Jaccard index) is defined for the ground truth and predicted images $I_T$ and $I_P$ as
+
+\begin{equation}
+\IoU{} \left( I_T, I_P \right) = \frac{|I_T \cap I_P|}{|I_T \cup I_P|},
+\end{equation}
+
+\noindent noting that a small positive number should be added to the denominator in a practical implementation to avoid division by zero.
+To extend this concept to multiclass segmentation, \IoU{} was calculated separately for each foreground class.
+A weighted sum of these five \IoU{} values was then calculated, where the weights were given by the ratio between the relevant foreground class and the union of all foreground classes, yielding weighted, mean foreground IoU{}.
+
+\subsubsection{Implementation}
+
+The model was implemented in the Python programming language using the Keras interface to Tensorflow \hl{\citep{Chollet2015,Abadi2016}}, and trained on one NVIDIA Titan X graphics processing unit (GPU) with 12 GB of memory.
+For all network architectures, it took roughly 20 minutes to iterate over the entire training set (1 epoch).
+At test time, the network predicted segmentations at roughly 15 frames per second.
+
+\hl{
+\subsection{2017 MICCAI \miccaidata{} dataset}
+
+Network B \hl{was retrained} from scratch on the 2017 MICCAI \miccaidata{} dataset.
+Th\hl{is} training dataset consist\hl{s} of stacked \SA{} cines from 100 patients with a range of pathologies (20 normal, 20 with myocardial infarction, 20 with dilated cardiomyopathy, 20 with hypertrophic cardiomyopathy, and 20 with \RV{} disease).
+Ground truth \LV{} myocardium, \LV{} bloodpool, and \RV{} bloodpool segmentations were provided at \ED{} and \ES{} for all spatial slices.
+Segmentation performance was assessed using both \IoU{} and the Dice coefficient in order to facilitate comparison with the \miccaidata{} results:
+
+\begin{equation}
+\mathrm{Dice} \left( I_T, I_P \right) = \frac{2|I_T \cap I_P|}{|I_T| + |I_P|},
+\end{equation}
+
+\noindent The network was trained using five-fold cross-validation, in accordance with the current state-of-the-art \citep{Isensee2017,Isensee2018}.
+}

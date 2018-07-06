@@ -1,0 +1,345 @@
+\begin{thebibliography}{32}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\href}[2]{#2}
+\providecommand{\path}[1]{#1}
+\providecommand{\DOIprefix}{doi:}
+\providecommand{\ArXivprefix}{arXiv:}
+\providecommand{\URLprefix}{URL: }
+\providecommand{\Pubmedprefix}{pmid:}
+\providecommand{\doi}[1]{\href{http://dx.doi.org/#1}{\path{#1}}}
+\providecommand{\Pubmed}[1]{\href{pmid:#1}{\path{#1}}}
+\providecommand{\bibinfo}[2]{#2}
+\ifx\xfnm\undefined \def\xfnm[#1]{\unskip,\space#1}\fi
+%Type = Unpublished
+\bibitem[{Abadi et~al.(2016)Abadi, Barham, Chen, Chen, Davis, Dean, Devin,
+  Ghemawat, Irving, Isard, Kudlur, Levenberg, Monga, Moore, Murray, Steiner,
+  Tucker, Vasudevan, Warden, Wicke, Yu and Zheng}]{Abadi2016}
+\bibinfo{author}{Abadi\xfnm[ M.]}, \bibinfo{author}{Barham\xfnm[ P.]},
+  \bibinfo{author}{Chen\xfnm[ J.]}, \bibinfo{author}{Chen\xfnm[ Z.]},
+  \bibinfo{author}{Davis\xfnm[ A.]}, \bibinfo{author}{Dean\xfnm[ J.]},
+  \bibinfo{author}{Devin\xfnm[ M.]}, \bibinfo{author}{Ghemawat\xfnm[ S.]},
+  \bibinfo{author}{Irving\xfnm[ G.]}, \bibinfo{author}{Isard\xfnm[ M.]},
+  \bibinfo{author}{Kudlur\xfnm[ M.]}, \bibinfo{author}{Levenberg\xfnm[ J.]},
+  \bibinfo{author}{Monga\xfnm[ R.]}, \bibinfo{author}{Moore\xfnm[ S.]},
+  \bibinfo{author}{Murray\xfnm[ D.G.]}, \bibinfo{author}{Steiner\xfnm[ B.]},
+  \bibinfo{author}{Tucker\xfnm[ P.]}, \bibinfo{author}{Vasudevan\xfnm[ V.]},
+  \bibinfo{author}{Warden\xfnm[ P.]}, \bibinfo{author}{Wicke\xfnm[ M.]},
+  \bibinfo{author}{Yu\xfnm[ Y.]}, \bibinfo{author}{Zheng\xfnm[ X.]}.
+\newblock \bibinfo{title}{{TensorFlow: A system for large-scale machine
+  learning}}; \bibinfo{year}{2016}.
+\newblock \URLprefix \url{https://arxiv.org/pdf/1605.08695.pdf}.
+  \href{http://arxiv.org/abs/arXiv:1605.08695v2}{\tt arXiv:arXiv:1605.08695v2}.
+%Type = Misc
+\bibitem[{Chollet(2015)}]{Chollet2015}
+\bibinfo{author}{Chollet\xfnm[ F.]}.
+\newblock \bibinfo{title}{{Keras}}.
+\newblock \bibinfo{year}{2015}.
+\newblock \URLprefix \url{https://github.com/fchollet/keras}.
+%Type = Article
+\bibitem[{Dieleman et~al.(2015)Dieleman, Willett and Dambre}]{Dieleman2015}
+\bibinfo{author}{Dieleman\xfnm[ S.]}, \bibinfo{author}{Willett\xfnm[ K.W.]},
+  \bibinfo{author}{Dambre\xfnm[ J.]}.
+\newblock \bibinfo{title}{{Rotation-invariant convolutional neural networks for
+  galaxy morphology prediction}}.
+\newblock \bibinfo{journal}{Monthly Notices of the Royal Astronomical Society}
+  \bibinfo{year}{2015};\bibinfo{volume}{450}(\bibinfo{number}{2}):\bibinfo{pages}{1441--1459}.
+\newblock \DOIprefix\doi{10.1093/mnras/stv632}.
+  \href{http://arxiv.org/abs/1503.07077}{\tt arXiv:1503.07077}.
+%Type = Inproceedings
+\bibitem[{He et~al.(2016)He, Zhang, Ren and Sun}]{He2016}
+\bibinfo{author}{He\xfnm[ K.]}, \bibinfo{author}{Zhang\xfnm[ X.]},
+  \bibinfo{author}{Ren\xfnm[ S.]}, \bibinfo{author}{Sun\xfnm[ J.]}.
+\newblock \bibinfo{title}{{Deep Residual Learning for Image Recognition}}.
+\newblock In: \bibinfo{booktitle}{CVPR}. \bibinfo{year}{2016}.
+  \href{http://arxiv.org/abs/arXiv:1512.03385v1}{\tt arXiv:arXiv:1512.03385v1}.
+%Type = Article
+\bibitem[{Ho et~al.(2017)Ho, Day, Colan, Russell, Towbin, Sherrid, Canter,
+  Jefferies, Murphy, Cirino, Abraham, Taylor, Mestroni, Bluemke, Jarolim, Shi,
+  Sleeper, Seidman and Orav}]{Ho2017}
+\bibinfo{author}{Ho\xfnm[ C.Y.]}, \bibinfo{author}{Day\xfnm[ S.M.]},
+  \bibinfo{author}{Colan\xfnm[ S.D.]}, \bibinfo{author}{Russell\xfnm[ M.W.]},
+  \bibinfo{author}{Towbin\xfnm[ J.A.]}, \bibinfo{author}{Sherrid\xfnm[ M.V.]},
+  \bibinfo{author}{Canter\xfnm[ C.E.]}, \bibinfo{author}{Jefferies\xfnm[
+  J.L.]}, \bibinfo{author}{Murphy\xfnm[ A.M.]}, \bibinfo{author}{Cirino\xfnm[
+  A.L.]}, \bibinfo{author}{Abraham\xfnm[ T.P.]}, \bibinfo{author}{Taylor\xfnm[
+  M.]}, \bibinfo{author}{Mestroni\xfnm[ L.]}, \bibinfo{author}{Bluemke\xfnm[
+  D.A.]}, \bibinfo{author}{Jarolim\xfnm[ P.]}, \bibinfo{author}{Shi\xfnm[ L.]},
+  \bibinfo{author}{Sleeper\xfnm[ L.A.]}, \bibinfo{author}{Seidman\xfnm[ C.E.]},
+  \bibinfo{author}{Orav\xfnm[ E.J.]}.
+\newblock \bibinfo{title}{{The Burden of Early Phenotypes and the Influence of
+  Wall Thickness in Hypertrophic Cardiomyopathy Mutation Carriers}}.
+\newblock \bibinfo{journal}{JAMA Cardiology}
+  \bibinfo{year}{2017};\bibinfo{volume}{2}(\bibinfo{number}{4}):\bibinfo{pages}{419--428}.
+\newblock \URLprefix
+  \url{http://cardiology.jamanetwork.com/article.aspx?doi=10.1001/jamacardio.2016.5670
+  http://cardiology.jamanetwork.com/article.aspx?doi=10.1001/jamacardio.2016.5670%5Cnhttp://www.ncbi.nlm.nih.gov/pubmed/28241245}.
+  \DOIprefix\doi{10.1001/jamacardio.2016.5670}.
+%Type = Inproceedings
+\bibitem[{Ioffe and Szegedy(2015)}]{Ioffe2015}
+\bibinfo{author}{Ioffe\xfnm[ S.]}, \bibinfo{author}{Szegedy\xfnm[ C.]}.
+\newblock \bibinfo{title}{{Batch Normalization: Accelerating Deep Network
+  Training by Reducing Internal Covariate Shift}}.
+\newblock In: \bibinfo{booktitle}{ICML}. volume~\bibinfo{volume}{37};
+  \bibinfo{year}{2015}. p. \bibinfo{pages}{81--87}.
+\newblock \URLprefix \url{http://arxiv.org/abs/1502.03167}.
+  \DOIprefix\doi{10.1007/s13398-014-0173-7.2}.
+  \href{http://arxiv.org/abs/arXiv:1011.1669v3}{\tt arXiv:arXiv:1011.1669v3}.
+%Type = Inproceedings
+\bibitem[{Isensee et~al.(2017)Isensee, Jaeger, Full, Wolf, Engelhardt and
+  Maier-Hein}]{Isensee2017}
+\bibinfo{author}{Isensee\xfnm[ F.]}, \bibinfo{author}{Jaeger\xfnm[ P.]},
+  \bibinfo{author}{Full\xfnm[ P.M.]}, \bibinfo{author}{Wolf\xfnm[ I.]},
+  \bibinfo{author}{Engelhardt\xfnm[ S.]}, \bibinfo{author}{Maier-Hein\xfnm[
+  K.H.]}.
+\newblock \bibinfo{title}{{Automatic Cardiac Disease Assessment on cine-MRI via
+  Time-Series Segmentation and Domain Specific Features}}.
+\newblock In: \bibinfo{booktitle}{STACOM}. \bibinfo{address}{Quebec City,
+  Quebec, Canada}; \bibinfo{year}{2017}. .
+%Type = Unpublished
+\bibitem[{Isensee et~al.(2018)Isensee, Jaeger, Full, Wolf, Engelhardt and
+  Maier-Hein}]{Isensee2018}
+\bibinfo{author}{Isensee\xfnm[ F.]}, \bibinfo{author}{Jaeger\xfnm[ P.]},
+  \bibinfo{author}{Full\xfnm[ P.M.]}, \bibinfo{author}{Wolf\xfnm[ I.]},
+  \bibinfo{author}{Engelhardt\xfnm[ S.]}, \bibinfo{author}{Maier-Hein\xfnm[
+  K.H.]}.
+\newblock \bibinfo{title}{{Automatic Cardiac Disease Assessment on cine-MRI via
+  Time-Series Segmentation and Domain Specific Features}};
+  \bibinfo{year}{2018}.
+\newblock \URLprefix \url{http://arxiv.org/abs/1707.00587}.
+  \href{http://arxiv.org/abs/1707.00587}{\tt arXiv:1707.00587}.
+%Type = Inproceedings
+\bibitem[{Jaderberg et~al.(2015)Jaderberg, Simonyan, Zisserman and
+  Kavukcuoglu}]{Jaderberg2015}
+\bibinfo{author}{Jaderberg\xfnm[ M.]}, \bibinfo{author}{Simonyan\xfnm[ K.]},
+  \bibinfo{author}{Zisserman\xfnm[ A.]}, \bibinfo{author}{Kavukcuoglu\xfnm[
+  K.]}.
+\newblock \bibinfo{title}{{Spatial Transformer Networks}}.
+\newblock In: \bibinfo{booktitle}{NIPS}. \bibinfo{year}{2015}. p.
+  \bibinfo{pages}{1--14}.
+\newblock \DOIprefix\doi{10.1038/nbt.3343}.
+  \href{http://arxiv.org/abs/arXiv:1506.02025v1}{\tt arXiv:arXiv:1506.02025v1}.
+%Type = Inproceedings
+\bibitem[{Kingma and Ba(2015)}]{Kingma2015}
+\bibinfo{author}{Kingma\xfnm[ D.]}, \bibinfo{author}{Ba\xfnm[ J.]}.
+\newblock \bibinfo{title}{{Adam: A Method for Stochastic Optimization}}.
+\newblock In: \bibinfo{booktitle}{ICLR}. \bibinfo{year}{2015}.
+  \href{http://arxiv.org/abs/arXiv:1412.6980v9}{\tt arXiv:arXiv:1412.6980v9}.
+%Type = Inproceedings
+\bibitem[{Krizhevsky et~al.(2012)Krizhevsky, Sutskever and
+  Hinton}]{Krizhevsky2012}
+\bibinfo{author}{Krizhevsky\xfnm[ A.]}, \bibinfo{author}{Sutskever\xfnm[ I.]},
+  \bibinfo{author}{Hinton\xfnm[ G.E.]}.
+\newblock \bibinfo{title}{{ImageNet Classification with Deep Convolutional
+  Neural Networks}}.
+\newblock In: \bibinfo{booktitle}{NIPS}. \bibinfo{year}{2012}. .
+%Type = Inproceedings
+\bibitem[{Lieman-Sifry et~al.(2017)Lieman-Sifry, Le, Lau, Sall and
+  Golden}]{Lieman-Sifry2017}
+\bibinfo{author}{Lieman-Sifry\xfnm[ J.]}, \bibinfo{author}{Le\xfnm[ M.]},
+  \bibinfo{author}{Lau\xfnm[ F.]}, \bibinfo{author}{Sall\xfnm[ S.]},
+  \bibinfo{author}{Golden\xfnm[ D.]}.
+\newblock \bibinfo{title}{{FastVentricle: Cardiac Segmentation with ENet}}.
+\newblock In: \bibinfo{booktitle}{FIMH}. \bibinfo{year}{2017}. \URLprefix
+  \url{http://arxiv.org/abs/1704.04296}.
+  \href{http://arxiv.org/abs/1704.04296}{\tt arXiv:1704.04296}.
+%Type = Inproceedings
+\bibitem[{Long et~al.(2015)Long, Shelhamer and Darrell}]{Long2015}
+\bibinfo{author}{Long\xfnm[ J.]}, \bibinfo{author}{Shelhamer\xfnm[ E.]},
+  \bibinfo{author}{Darrell\xfnm[ T.]}.
+\newblock \bibinfo{title}{{Fully convolutional networks for semantic
+  segmentation}}.
+\newblock In: \bibinfo{booktitle}{CVPR}. volume \bibinfo{volume}{07-12-June};
+  \bibinfo{year}{2015}. p. \bibinfo{pages}{3431--3440}.
+\newblock \DOIprefix\doi{10.1109/CVPR.2015.7298965}.
+  \href{http://arxiv.org/abs/1411.4038}{\tt arXiv:1411.4038}.
+%Type = Article
+\bibitem[{Luo et~al.(2016)Luo, An, Wang, Dong and Zhang}]{Luo2016}
+\bibinfo{author}{Luo\xfnm[ G.]}, \bibinfo{author}{An\xfnm[ R.]},
+  \bibinfo{author}{Wang\xfnm[ K.]}, \bibinfo{author}{Dong\xfnm[ S.]},
+  \bibinfo{author}{Zhang\xfnm[ H.]}.
+\newblock \bibinfo{title}{{A Deep Learning Network for Right Ventricle
+  Segmentation in Short-Axis MRI}}.
+\newblock \bibinfo{journal}{Computing in Cardiology}
+  \bibinfo{year}{2016};\bibinfo{volume}{43}:\bibinfo{pages}{485--488}.
+%Type = Inproceedings
+\bibitem[{Newell et~al.(2016)Newell, Yang and Deng}]{Newell2016}
+\bibinfo{author}{Newell\xfnm[ A.]}, \bibinfo{author}{Yang\xfnm[ K.]},
+  \bibinfo{author}{Deng\xfnm[ J.]}.
+\newblock \bibinfo{title}{{Stacked Hourglass Networks for Human Pose
+  Estimation}}.
+\newblock In: \bibinfo{booktitle}{ECCV}. \bibinfo{year}{2016}. \URLprefix
+  \url{http://arxiv.org/abs/1603.06937}.
+  \DOIprefix\doi{10.1007/978-3-319-46484-8}.
+  \href{http://arxiv.org/abs/1603.06937}{\tt arXiv:1603.06937}.
+%Type = Inproceedings
+\bibitem[{Noh et~al.(2015)Noh, Hong and Han}]{Noh2015}
+\bibinfo{author}{Noh\xfnm[ H.]}, \bibinfo{author}{Hong\xfnm[ S.]},
+  \bibinfo{author}{Han\xfnm[ B.]}.
+\newblock \bibinfo{title}{{Learning Deconvolution Network for Semantic
+  Segmentation}}.
+\newblock In: \bibinfo{booktitle}{ICCV}. volume~\bibinfo{volume}{1};
+  \bibinfo{year}{2015}. \URLprefix \url{http://arxiv.org/abs/1505.04366}.
+  \DOIprefix\doi{10.1109/ICCV.2015.178}.
+  \href{http://arxiv.org/abs/1505.04366}{\tt arXiv:1505.04366}.
+%Type = Misc
+\bibitem[{Paszke et~al.(2016)Paszke, Chaurasia, Kim and
+  Culurciello}]{Paszke2016}
+\bibinfo{author}{Paszke\xfnm[ A.]}, \bibinfo{author}{Chaurasia\xfnm[ A.]},
+  \bibinfo{author}{Kim\xfnm[ S.]}, \bibinfo{author}{Culurciello\xfnm[ E.]}.
+\newblock \bibinfo{title}{{ENet: A Deep Neural Network Architecture for
+  Real-Time Semantic Segmentation}}.
+\newblock \bibinfo{year}{2016}.
+\newblock \URLprefix \url{https://arxiv.org/abs/1606.02147}.
+  \href{http://arxiv.org/abs/arXiv:1606.02147v1}{\tt arXiv:arXiv:1606.02147v1}.
+%Type = Article
+\bibitem[{Peng et~al.(2016)Peng, Lekadir, Gooya, Shao, Petersen and
+  Frangi}]{Peng2016}
+\bibinfo{author}{Peng\xfnm[ P.]}, \bibinfo{author}{Lekadir\xfnm[ K.]},
+  \bibinfo{author}{Gooya\xfnm[ A.]}, \bibinfo{author}{Shao\xfnm[ L.]},
+  \bibinfo{author}{Petersen\xfnm[ S.E.]}, \bibinfo{author}{Frangi\xfnm[ A.F.]}.
+\newblock \bibinfo{title}{{A review of heart chamber segmentation for
+  structural and functional analysis using cardiac magnetic resonance
+  imaging}}.
+\newblock \bibinfo{journal}{MAGMA}
+  \bibinfo{year}{2016};\bibinfo{volume}{29}(\bibinfo{number}{2}):\bibinfo{pages}{155--195}.
+\newblock \DOIprefix\doi{10.1007/s10334-015-0521-4}.
+%Type = Inproceedings
+\bibitem[{Poudel et~al.(2016)Poudel, Lamata and Montana}]{Poudel2016a}
+\bibinfo{author}{Poudel\xfnm[ R.P.]}, \bibinfo{author}{Lamata\xfnm[ P.]},
+  \bibinfo{author}{Montana\xfnm[ G.]}.
+\newblock \bibinfo{title}{{Recurrent Fully Convolutional Neural Networks for
+  Multi-slice MRI Cardiac Segmentation}}.
+\newblock In: \bibinfo{booktitle}{HVSMR}. \bibinfo{year}{2016}. \URLprefix
+  \url{http://arxiv.org/abs/1608.03974}.
+  \DOIprefix\doi{10.1007/978-3-319-52280-7_8}.
+  \href{http://arxiv.org/abs/1608.03974}{\tt arXiv:1608.03974}.
+%Type = Inproceedings
+\bibitem[{Ronneberger et~al.(2015)Ronneberger, Fischer and
+  Brox}]{Ronneberger2015}
+\bibinfo{author}{Ronneberger\xfnm[ O.]}, \bibinfo{author}{Fischer\xfnm[ P.]},
+  \bibinfo{author}{Brox\xfnm[ T.]}.
+\newblock \bibinfo{title}{{U-Net: Convolutional Networks for Biomedical Image
+  Segmentation}}.
+\newblock In: \bibinfo{booktitle}{MICCAI}. \bibinfo{year}{2015}. p.
+  \bibinfo{pages}{234--241}.
+\newblock \DOIprefix\doi{10.1007/978-3-319-24574-4_28}.
+  \href{http://arxiv.org/abs/1505.04597}{\tt arXiv:1505.04597}.
+%Type = Inproceedings
+\bibitem[{Saxe et~al.(2014)Saxe, McClelland and Ganguli}]{Saxe2013}
+\bibinfo{author}{Saxe\xfnm[ A.M.]}, \bibinfo{author}{McClelland\xfnm[ J.L.]},
+  \bibinfo{author}{Ganguli\xfnm[ S.]}.
+\newblock \bibinfo{title}{{Exact solutions to the nonlinear dynamics of
+  learning in deep linear neural networks}}.
+\newblock In: \bibinfo{booktitle}{ICLR}. \bibinfo{year}{2014}. p.
+  \bibinfo{pages}{1--22}.
+\newblock \URLprefix \url{http://arxiv.org/abs/1312.6120}.
+  \href{http://arxiv.org/abs/1312.6120}{\tt arXiv:1312.6120}.
+%Type = Article
+\bibitem[{Sifre and Mallat(2013)}]{Sifre2013}
+\bibinfo{author}{Sifre\xfnm[ L.]}, \bibinfo{author}{Mallat\xfnm[ S.]}.
+\newblock \bibinfo{title}{{Rotation, scaling and deformation invariant
+  scattering for texture discrimination}}.
+\newblock \bibinfo{journal}{Proceedings of the IEEE Computer Society Conference
+  on Computer Vision and Pattern Recognition}
+  \bibinfo{year}{2013};:\bibinfo{pages}{1233--1240}\DOIprefix\doi{10.1109/CVPR.2013.163}.
+%Type = Inproceedings
+\bibitem[{Simonyan and Zisserman(2014)}]{Simonyan2015}
+\bibinfo{author}{Simonyan\xfnm[ K.]}, \bibinfo{author}{Zisserman\xfnm[ A.]}.
+\newblock \bibinfo{title}{{Very Deep Convolutional Networks for Large-Scale
+  Image Recognition}}.
+\newblock In: \bibinfo{booktitle}{ICLR}. \bibinfo{year}{2014}. p.
+  \bibinfo{pages}{1--14}.
+\newblock \href{http://arxiv.org/abs/arXiv:1409.1556v6}{\tt
+  arXiv:arXiv:1409.1556v6}.
+%Type = Inproceedings
+\bibitem[{Sinclair et~al.(2017)Sinclair, Bai, Puyol-Ant{\'{o}}n, Oktay,
+  Rueckert and King}]{Sinclair2017}
+\bibinfo{author}{Sinclair\xfnm[ M.]}, \bibinfo{author}{Bai\xfnm[ W.]},
+  \bibinfo{author}{Puyol-Ant{\'{o}}n\xfnm[ E.]}, \bibinfo{author}{Oktay\xfnm[
+  O.]}, \bibinfo{author}{Rueckert\xfnm[ D.]}, \bibinfo{author}{King\xfnm[
+  A.P.]}.
+\newblock \bibinfo{title}{{Fully Automated Segmentation-Based Respiratory
+  Motion Correction of Multiplanar Cardiac Magnetic Resonance Images for
+  Large-Scale Datasets}}.
+\newblock In: \bibinfo{booktitle}{MICCAI}. volume~\bibinfo{volume}{2};
+  \bibinfo{year}{2017}. p. \bibinfo{pages}{332--340}.
+\newblock \URLprefix
+  \url{http://link.springer.com/10.1007/978-3-319-66185-8_38}.
+  \DOIprefix\doi{10.1007/978-3-319-66185-8_38}.
+%Type = Inproceedings
+\bibitem[{Tan et~al.(2016)Tan, Liew, Lim and Mclaughlin}]{Tan2016}
+\bibinfo{author}{Tan\xfnm[ L.K.]}, \bibinfo{author}{Liew\xfnm[ Y.M.]},
+  \bibinfo{author}{Lim\xfnm[ E.]}, \bibinfo{author}{Mclaughlin\xfnm[ R.A.]}.
+\newblock \bibinfo{title}{{Cardiac Left Ventricle Segmentation using
+  Convolutional Neural Network Regression}}.
+\newblock In: \bibinfo{booktitle}{IECBES}. \bibinfo{year}{2016}. p.
+  \bibinfo{pages}{490--493}.
+%Type = Article
+\bibitem[{Tan et~al.(2017)Tan, Liew, Lim and McLaughlin}]{Tan2017}
+\bibinfo{author}{Tan\xfnm[ L.K.]}, \bibinfo{author}{Liew\xfnm[ Y.M.]},
+  \bibinfo{author}{Lim\xfnm[ E.]}, \bibinfo{author}{McLaughlin\xfnm[ R.A.]}.
+\newblock \bibinfo{title}{{Convolutional neural network regression for
+  short-axis left ventricle segmentation in cardiac cine MR sequences}}.
+\newblock \bibinfo{journal}{Medical Image Analysis}
+  \bibinfo{year}{2017};\bibinfo{volume}{39}:\bibinfo{pages}{78--86}.
+\newblock \URLprefix
+  \url{https://www.sciencedirect.com/science/article/pii/S1361841517300543}.
+  \DOIprefix\doi{10.1016/j.media.2017.04.002}.
+%Type = Unpublished
+\bibitem[{Tran(2016)}]{Tran2016}
+\bibinfo{author}{Tran\xfnm[ P.V.]}.
+\newblock \bibinfo{title}{{A Fully Convolutional Neural Network for Cardiac
+  Segmentation in Short-Axis MRI}}; \bibinfo{year}{2016}.
+\newblock \URLprefix \url{http://arxiv.org/abs/1604.00494}.
+  \href{http://arxiv.org/abs/1604.00494}{\tt arXiv:1604.00494}.
+%Type = Book
+\bibitem[{Vigneault et~al.(2017)Vigneault, Xie, Bluemke and
+  Noble}]{Vigneault2017}
+\bibinfo{author}{Vigneault\xfnm[ D.]}, \bibinfo{author}{Xie\xfnm[ W.]},
+  \bibinfo{author}{Bluemke\xfnm[ D.]}, \bibinfo{author}{Noble\xfnm[ J.]}.
+\newblock \bibinfo{title}{{Feature tracking cardiac magnetic resonance via deep
+  learning and spline optimization}}.
+\newblock volume \bibinfo{volume}{10263 LNCS}, \bibinfo{year}{2017}.
+\newblock \DOIprefix\doi{10.1007/978-3-319-59448-4_18}.
+%Type = Inproceedings
+\bibitem[{Viola and Jones(2001)}]{Viola2001}
+\bibinfo{author}{Viola\xfnm[ P.]}, \bibinfo{author}{Jones\xfnm[ M.]}.
+\newblock \bibinfo{title}{{Rapid Object Detection using a Boosted Cascade of
+  Simple Features}}.
+\newblock In: \bibinfo{booktitle}{CVPR}. \bibinfo{year}{2001}. .
+%Type = Inproceedings
+\bibitem[{Xie et~al.(2015)Xie, Noble and Zisserman}]{Xie2015}
+\bibinfo{author}{Xie\xfnm[ W.]}, \bibinfo{author}{Noble\xfnm[ J.A.]},
+  \bibinfo{author}{Zisserman\xfnm[ A.]}.
+\newblock \bibinfo{title}{{Microscopy Cell Counting with Fully Convolutional
+  Regression Networks}}.
+\newblock In: \bibinfo{booktitle}{MICCAI Workshop}. \bibinfo{year}{2015}. p.
+  \bibinfo{pages}{1--10}.
+\newblock \URLprefix
+  \url{http://www.tandfonline.com.myaccess.library.utoronto.ca/doi/full/10.1080/21681163.2016.1149104}.
+  \DOIprefix\doi{10.1080/21681163.2016.1149104}.
+%Type = Inproceedings
+\bibitem[{Yu and Koltun(2016)}]{Yu2016}
+\bibinfo{author}{Yu\xfnm[ F.]}, \bibinfo{author}{Koltun\xfnm[ V.]}.
+\newblock \bibinfo{title}{{Multi-Scale Context Aggregation by Dilated
+  Convolutions}}.
+\newblock In: \bibinfo{booktitle}{ICLR}. \bibinfo{year}{2016}. p.
+  \bibinfo{pages}{1--9}.
+\newblock \URLprefix \url{http://arxiv.org/abs/1511.07122}.
+  \DOIprefix\doi{10.16373/j.cnki.ahr.150049}.
+  \href{http://arxiv.org/abs/1511.07122}{\tt arXiv:1511.07122}.
+%Type = Article
+\bibitem[{Yushkevich et~al.(2006)Yushkevich, Piven, Hazlett, Smith, Ho, Gee and
+  Gerig}]{Yushkevich2006}
+\bibinfo{author}{Yushkevich\xfnm[ P.A.]}, \bibinfo{author}{Piven\xfnm[ J.]},
+  \bibinfo{author}{Hazlett\xfnm[ H.C.]}, \bibinfo{author}{Smith\xfnm[ R.G.]},
+  \bibinfo{author}{Ho\xfnm[ S.]}, \bibinfo{author}{Gee\xfnm[ J.C.]},
+  \bibinfo{author}{Gerig\xfnm[ G.]}.
+\newblock \bibinfo{title}{{User-guided 3D active contour segmentation of
+  anatomical structures : Significantly improved efficiency and reliability}}.
+\newblock \bibinfo{journal}{NeuroImage}
+  \bibinfo{year}{2006};\bibinfo{volume}{31}:\bibinfo{pages}{1116--1128}.
+\newblock \DOIprefix\doi{10.1016/j.neuroimage.2006.01.015}.
+
+\end{thebibliography}

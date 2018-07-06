@@ -1,0 +1,12 @@
+
+\hl{W}e have presented \omeganet{} (Omega-Net): a novel \CNN{} architecture for simultaneous \hl{localization}, transformation into a canonical orientation, and semantic segmentation.
+First, an \hl{initial} segmentation is performed on the input image; second, the features learned during this \hl{initial} segmentation are used to predict the parameters needed to transform the input image into a canonical orientation; and third, a \hl{final} segmentation is performed on the transformed image.
+The network was trained end-to-end from scratch \hl{on two different datasets.
+On the HCMNet dataset,} \omeganet{} was trained to predict five foreground classes in three clinical views, constituting a substantially more challenging problem compared with prior work.
+The trained network performed well in a cohort of both healthy subjects and patients with severe \LV{} pathology.
+\hl{
+A variant of the \omeganet{} network was trained from scratch on a publicly-available dataset, and achieved state-of-the-art performance in two of three segmenttion classes.
+}
+We believe this architecture represents a substantive advancement over prior approaches, with implications for biomedical image segmentation more generally.
+
+

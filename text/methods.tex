@@ -1,0 +1,204 @@
+
+\hl{
+Due to the lack of rotation invariance/equivariance in \CNN{}s, current practice is for models to be trained with large datasets representing all possible rotations and/or substantial data augmentations (e.g., affine transformations, warpings, etc).
+We conjecture that b}iomedical image segmentation can be more efficiently accomplished if structures of interest have first been detected and transformed into a canonical orientation.
+In the context of \CMR{}, the canonical orientation is defined separately for each clinical plane (Fig.~\ref{fig:canonical-orientation}).
+We propose a \hl{stepwise} strategy for segmentation of cardiac \SSFP{} images in an end-to-end differentiable \CNN{} framework, allowing for the \hl{localization}, alignment, and segmentation tasks to be codependent. 
+Our model consists of three stages.
+First, the full-resolution, \hl{original} input image $\image$ undergoes \hl{an initial} segmentation using a \UNet{} module (\S\ref{sec:unet}).
+Second, the central (most \hl{down-sampled}) features of the aforementioned \UNet{} module are used to predict a rigid, affine matrix $\tmat$ capable of transforming $\image$ into a canonical orientation $\timage = \trans(\image, \tmat)$ (\S\ref{sec:stn}).
+Third, the transformed image $\timage$ is segmented using a stacked hourglass module (\S\ref{sec:hourglass}).
+In the following subsections, each component of the network is discussed in detail.
+In terms of notation, a superposed chevron (e.g., $\hat{x}$) indicates ground truth, and a superscript tick (e.g., $x^\prime$) indicates that the quantity pertains to the transformed data.
+
+\subsection{Initial segmentation (\UNet{}) module}\label{sec:unet}
+
+\input{\figdir unet-module.tex}
+
+The proposed network makes use of the \UNet{} module (Fig.~\ref{fig:unet-module}), a type of deep convolutional neural network which has performed well in biomedical segmentation tasks \citep{Long2015,Ronneberger2015,Xie2015}.
+The \UNet{} architecture consists of a down-sampling path (left) followed by an up-sampling path (right) to restore the original spatial resolution.
+The downsampling path resembles the canonical classification \CNN{} \citep{Krizhevsky2012,Simonyan2015}, with two $3 \times 3$ convolutions, a rectified linear unit (\ReLU{}) activation, 
+and a $2 \times 2$ max pooling step repeatedly applied to the input image and feature maps.  
+In the upsampling path, the reduction in spatial resolution is ``undone'' by performing $2 \times 2$ up-sampling, \ReLU{} activation, and $3 \times 3$ convolution, eventually mapping the intermediate feature representation back to the original resolution.
+To provide accurate boundary localization, skip connections are used, where feature representations from the down-sampling path are concatenated with feature maps of the same resolution in the up-sampling path.
+Batch normalization \mbox{\citep{Ioffe2015}}, which has been shown to counteract gradient vanishing and to lead to better convergence, was performed between each pair of convolution and ReLU activation layers.
+The loss $L_{S_U}$ for the \UNet{} module is the categorical cross entropy between the output of the softmax layer, $P$, and the ground truth segmentation, $\hat{S}$,
+
+\begin{equation}\label{eqn:unet-loss}
+L_{S_U} = -\frac{1}{HW} \sum_{\forall h,w} \CCE(P_{h,w}, \hat{S}_{h,w}),
+\end{equation}
+
+\noindent where
+
+\begin{equation}\label{eqn:cross-entropy}
+\CCE(x, \hat{x}) = - \hat{x} \log(x) + (1 - \hat{x}) \log(1 - x).
+\end{equation}
+
+\hl{
+Here, $H$ and $W$ are the height and width of the input image in pixels, and $h$ and $w$ are corresponding pixel indices.
+}
+
+\subsection{\hl{Transformation} module}\label{sec:stn}
+
+\input{\figdir stn-module.tex}
+
+The spatial transformer network (\STN{}) was originally proposed as a general layer for classification tasks requiring spatial invariance for high performance \hl{\citep{Jaderberg2015}}.
+The \STN{} module itself consists of three submodules, namely: a localization network (\LocNet{}), which predicts a rigid, affine transformation matrix, $\tmat$; a grid generator, which implements the transform, $\trans$; and a sampler, which implements the interpolation.
+
+In \citep{Jaderberg2015}, 
+the \STN{} was allowed to learn whichever transformation parameters best aid the classification task; 
+no ground truth transformation was specified, 
+and the predicted transformation matrix was used to transform the intermediate \emph{feature maps}.
+By contrast, in our application we are specifically interested in learning to transform the \emph{input image} into the standard clinical orientation, as a precursor to semantic segmentation.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 	Locnet
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Localization network (\LocNet{})}
+
+Intuitively, a human expert is able to provide translation, rotation, and scaling information given a rough segmentation of the heart.  Based on this assumption, we branch out a small localization network (\LocNet{}) from the layer immediately following the final max pooling step of the \UNet{} in order to predict the transformation parameters (Fig.~\ref{fig:stn-module}).  As we have restricted our transform to \hl{allow only translation, rotation, and scaling}, the affine matrix was decomposed into three separate matrices:
+
+$$
+\tmat = SRT,
+$$
+
+\noindent where $T$ is the translation matrix:
+
+$$
+T =
+\begin{bmatrix}
+1 & 0 & t_x \\
+0 & 1 & t_y \\
+0 & 0 & 1 \\
+\end{bmatrix};
+$$
+
+\noindent $R$ is the (counter clockwise) rotation matrix:
+
+$$
+R =
+\begin{bmatrix}
+\cos(\theta) & - \sin(\theta) & 0 \\
+\sin(\theta) & \cos(\theta) & 0 \\
+0 & 0 & 1 \\
+\end{bmatrix};
+$$
+
+\noindent and $S$ is the (uniform) scaling matrix:
+
+$$
+S =
+\begin{bmatrix}
+s & 0 & 0 \\
+0 & s & 0 \\
+0 & 0 & 1 \\
+\end{bmatrix}.
+$$
+
+\noindent Note that the images are defined on a normalized coordinate space $\{x, y\} \in [-1, +1]$, such that rotation and scaling occur relative to the image center.
+
+In practice, the \LocNet{} learns to predict only the relevant parameters, $\tparams = \begin{bmatrix}t_x & t_y & \theta & s \end{bmatrix}^\top$.
+During training, we explicitly provide the ground-truth transformation parameters $\hat{\tparams} = \begin{bmatrix} \hat{t_x} & \hat{t_y} & \hat{\theta} & \hat{s} \end{bmatrix}$, minimizing two types of losses, which we term \emph{matrix losses} and \emph{image losses}.
+
+The matrix losses are regression losses between the ground truth and predicted parameters ($L_{t_x}$, $L_{t_y}$, $L_\theta$, $L_s$).
+For scaling and translation, mean squared error (\MSE{}) was used:
+
+\begin{align}
+L_{t_x} & = \frac{1}{2} (t_x - \hat{t_x})^2, \label{eqn:attn-mat-loss-tx} \\
+L_{t_y} & = \frac{1}{2} (t_y - \hat{t_y})^2, \mathrm{~and} \label{eqn:attn-mat-loss-ty} \\
+L_s     & = \frac{1}{2} (s - \hat{s})^2. \label{eqn:attn-mat-loss-s}
+\end{align}
+
+\input{\figdir wrapped-phase-loss.tex}
+
+Na\"{i}ve \MSE{} is an inappropriate loss for regressing on $\theta$ given its periodicity\hl{.  Intuitively, t}his can be understood intuitively by considering ground truth and predicted rotations of $\hat{\theta} = +\pi$ and $\theta = -\pi$, which yield a high \MSE{} in spite of being synonymous.
+For this reason, we introduce a wrapped phase loss, mean squared wrapped error (\MSWE{}, Fig.~\ref{fig:wrapped-phase-loss}), where $\theta - \hat{\theta}$ is wrapped into the range $[-\pi, \pi)$ prior to calculating the standard \MSE{},
+
+\begin{equation}
+L_\theta = \frac{1}{2} \left(\wrap(\theta - \hat{\theta})\right)^2, \label{eqn:attn-mat-loss-r}
+\end{equation}
+
+\noindent and the wrapping operator $\wrap$ is defined as
+
+$$
+\wrap(\cdot) = \mod(\cdot + \pi, 2\pi) - \pi.
+$$
+
+Training the \hl{transformation} module based on these losses alone caused the network to overfit the training data.
+For this reason, we additionally regularized based on the \MSE{} between the input image after translation, rotation, and scaling with the ground truth ($\hat{\tparams}$) and predicted ($\tparams$) transformation parameters:
+
+\begin{align}
+L_{\image_t}      & = \frac{1}{2} (\trans(\image, T  ) - \trans(\image, \hat{T}  ))^2,                     \label{eqn:attn-image-loss-t} \\
+L_{\image_\theta} & = \frac{1}{2} (\trans(\image, RT ) - \trans(\image, \hat{R}\hat{T} ))^2, \mathrm{~and} \label{eqn:attn-image-loss-r} \\
+L_{\image_s}      & = \frac{1}{2} (\trans(\image, SRT) - \trans(\image, \hat{S}\hat{R}\hat{T}))^2.         \label{eqn:attn-image-loss-s}
+\end{align}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 	Sampler
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Grid generation and sampling}
+
+\hl{In general,} a \ND{2} ``grid generator'' takes a (typically uniform) sampling of points $G \in \Real^{2 \times H' \times W'}$ and transforms them according to the parameters predicted by a \LocNet{}.
+In our application, we created three such grids, each of equal dimension to the input ($H' = W' = \N$) and uniformly spaced over the extent of the image ($x \in [-1,1]$, $y \in [-1, 1]$)\hl{.
+T}hese grids were then transformed by the matrices $T$, $RT$, and $SRT$ (predicted by the \LocNet{}) to determine which points to sample from the input image.
+
+The ``sampler'' takes the input image $\image \in \Real^{H \times W \times C}$ and the transformed grid $G^\prime$ as arguments, and produces a resampled image $\timage \in \Real^{H' \times W' \times C}$.\footnote{\hl{For completeness, we have included the number of channels $C$ in this description as a variable parameter; however, it should be emphasized that in our application the grayscale input image $\image$ is transformed, such that $C = 1$.}}
+For each channel $c \in [1 \twodots C ]$, the output $\timage_{h',w',c}$ at the location $(h',w')$ is a weighted sum of the input values $\image_{h,w,c}$ in the neighborhood of location ($G^\prime_{1,h',w'}, G^\prime_{2,h',w'}$),
+
+
+$$
+\begin{aligned}
+\timage_{h',w',c} & = \sum^H_{h=1}\sum^W_{w=1}\image_{h, w, c} \\
+                  & \cdot \max\left(0, 1-|\alpha_v G^\prime_{1, h', w'} + \beta_v - h| \right) \\
+                  & \cdot \max\left(0, 1-|\alpha_u G^\prime_{2, h', w'} + \beta_u - w| \right),
+\end{aligned}
+$$
+
+\noindent where
+
+$$
+\begin{aligned}
+\alpha_v & = +\frac{H-1}{2},               \\
+\beta_v  & = -\frac{H+1}{2},              \\
+\alpha_u & = +\frac{W-1}{2}, \mathrm{ and} \\
+\beta_u  & = - \frac{W+1}{2}.
+\end{aligned}
+$$
+
+\noindent Every step here is differentiable (either a gradient or sub-gradient is defined), such that the model can be trained end-to-end.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 	Hourglass
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{\hl{Final} segmentation (stacked hourglass) module}\label{sec:hourglass}
+
+The output of the \hl{transformation} module, having been transformed into a canonical orientation, is then input into a stacked hourglass architecture.
+The hourglass consisted of $D = [1 \twodots 3]$ \UNet{} modules in series with one another, each producing a segmentation $S_{H,d}$, where $d \in [1 \twodots D]$.
+With reference to Eqn.~\eqref{eqn:cross-entropy}, the categorical cross-entropy between the softmax output of the hourglass at depth $d$, $P^{H,d}_{h,w}$ and the (transformed) ground truth $\hat{S}^\prime$ segmentations is calculated,
+
+\begin{equation}\label{eqn:hourglass-loss}
+L_{S_{H,d}} = -\frac{1}{HW} \sum_{\forall h,w} \CCE(P^{H,d}_{h,w}\hat{S}^\prime_{h,w}).
+\end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 	Summary
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Summary}
+
+To summarize, we train the \omeganet{} with one loss from the \hl{initial} segmentation module, \cref{eqn:unet-loss}; four matrix losses, \cref{eqn:attn-mat-loss-tx,eqn:attn-mat-loss-ty,eqn:attn-mat-loss-s,eqn:attn-mat-loss-r}, and three image losses, \cref{eqn:attn-image-loss-t,eqn:attn-image-loss-s,eqn:attn-image-loss-r}, from the \hl{transformation} module; and between one and three losses from the \hl{final} segmentation module, \cref{eqn:hourglass-loss}.  Therefore, the overall loss function may be written:
+
+\begin{equation}
+\begin{aligned}
+L_\Omega & = \alpha_1 L_{S_U} \\
+  & + \alpha_2 (L_{t_x} + L_{t_y} + L_{\theta}+ L_{s}) \\
+  & + \alpha_3 (L_{I_t} + L_{I_\theta} + L_{I_s}) \\
+  & + \alpha_4 \sum_{d=1}^D L_{S_{H,d}}, \\
+\end{aligned}
+\end{equation}
+
+\noindent where $\alpha_1 = 100.0$, $\alpha_2 = 100.0$, $\alpha_3 = 0.1$, and $\alpha_4 = 1.0$.
+The architectures \hl{evaluated} are summarized in Table~\ref{tab:architecture-descriptions}.
+
+\hl{
+While the dataset was manually augmented by transforming the input with small, rigid, affine transformations, it is worth noting that data augmentation is performed \emph{implicitly} in the fine segmentation module by virtue of the fact that, in the early stages of training, the transformation parameters predicted by the transformation module are random.
+}

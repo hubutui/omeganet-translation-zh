@@ -1,0 +1,48 @@
+\renewcommand{\captiontitle}{Selected failure cases from \CNN{} segmentation}
+\begin{figure*}
+\begin{center}
+
+\setlength{\tabcolsep}{1pt}
+
+\begin{tabular}{cccc}
+
+\toprule
+\SA{} (Apex) & \SA{} (Apex) & \HLA{} & \VLA{} \\
+\midrule
+
+\multicolumn{4}{c}{Original Untransformed Image: $\image$} \\
+
+\includegraphics[width=0.19\textwidth]{./data/failures/HCMNet_2000062/00_SAX/9/9.png} &
+\includegraphics[width=0.19\textwidth]{./data/failures/HCMNet_2400044/00_SAX/2/5.png} &
+\includegraphics[width=0.19\textwidth]{./data/failures/HCMNet_2600079/01_HLA/00/0.png} &
+\includegraphics[width=0.19\textwidth]{./data/failures/HCMNet_2600079/02_VLA/00/0.png} \\
+
+\multicolumn{4}{c}{Structure \hl{Localization}} \\
+
+\includegraphics[width=0.19\textwidth]{./data/failures/HCMNet_2000062/00_SAX/9/9_bbox.png} &
+\includegraphics[width=0.19\textwidth]{./data/failures/HCMNet_2400044/00_SAX/2/5_bbox.png} &
+\includegraphics[width=0.19\textwidth]{./data/failures/HCMNet_2600079/01_HLA/00/0_bbox.png} &
+\includegraphics[width=0.19\textwidth]{./data/failures/HCMNet_2600079/02_VLA/00/0_bbox.png} \\
+
+\multicolumn{4}{c}{Predicted Segmentation in Canonical Orientation: $S^\prime$} \\
+
+\includegraphics[width=0.19\textwidth]{./data/failures/HCMNet_2000062/00_SAX/9/9_pred.png} &
+\includegraphics[width=0.19\textwidth]{./data/failures/HCMNet_2400044/00_SAX/2/5_pred.png} &
+\includegraphics[width=0.19\textwidth]{./data/failures/HCMNet_2600079/01_HLA/00/0_pred.png} &
+\includegraphics[width=0.19\textwidth]{./data/failures/HCMNet_2600079/02_VLA/00/0_pred.png} \\
+\bottomrule
+
+\multicolumn{4}{c}{Ground Truth Segmentation in Canonical Orientation: $\hat{S}^\prime$} \\
+
+\includegraphics[width=0.19\textwidth]{./data/failures/HCMNet_2000062/00_SAX/9/9_gt.png} &
+\includegraphics[width=0.19\textwidth]{./data/failures/HCMNet_2400044/00_SAX/2/5_gt.png} &
+\includegraphics[width=0.19\textwidth]{./data/failures/HCMNet_2600079/01_HLA/00/0_gt.png} &
+\includegraphics[width=0.19\textwidth]{./data/failures/HCMNet_2600079/02_VLA/00/0_gt.png} \\
+\bottomrule
+
+\end{tabular}
+
+\caption[\captiontitle]{\captiontitle{}.  See text for discussion.}
+\label{fig:failure}
+\end{center}
+\end{figure*}

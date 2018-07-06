@@ -1,0 +1,34 @@
+\renewcommand{\captiontitle}{Segmentation accuracy on the 2017 MICCIA \miccaidata{} dataset}
+\begin{table*}
+\hl{
+\begin{center}
+\begin{tabular}{lccc} \hline
+\toprule
+Structure           & \LV{} Bloodpool & \RV{} Bloodpool & \LV{} Myocardium \\
+\midrule
+\multicolumn{4}{c}{Jaccard Index (\IoU{})} \\
+\midrule
+\omeganet{}         & \textbf{\ACDCONJLVBP{}}  & \textbf{\ACDCONJRVBP{}}  & \ACDCONJLVMY{}           \\
+\citet{Isensee2018} & \ACDCFINJLVBP{}          & \ACDCFINJRVBP{}          & \textbf{\ACDCFINJLVMY{}} \\
+\citet{Isensee2017} & \ACDCFIOJLVBP{}          & \ACDCFIOJRVBP{}          & \ACDCFIOJLVMY{}          \\
+\midrule
+\multicolumn{4}{c}{Dice Coefficient} \\
+\midrule
+\omeganet{}         & \textbf{\ACDCONDLVBP{}}  & \textbf{\ACDCONDRVBP{}}  & \ACDCONDLVMY{}           \\
+\citet{Isensee2018} & \ACDCFINDLVBP{}          & \ACDCFINDRVBP{}          & \textbf{\ACDCFINDLVMY{}} \\
+\citet{Isensee2017} & \ACDCFIODLVBP{}          & \ACDCFIODRVBP{}          & \ACDCFIODLVMY{}          \\
+\bottomrule
+\end{tabular}
+\caption[\captiontitle{}]{
+\hl{
+\captiontitle{}.
+Segmentation accuracy is reported as Dice coefficient in the \miccaidata{} challenge, but as \IoU{} elsewhere in this work; therefore, both are reported here.
+(Note that $\mathrm{Dice} = 2 * \mathrm{\IoU{}} / (1 + \mathrm{\IoU{}})$).
+Results are reported for the Network B variant of the \omeganet{}; for the results by \citet{Isensee2017} published in STACOM; and for the same group's unpublished \url{arxiv.org} revision \citet{Isensee2018}.
+Boldface formatting indicates the best performing model for each foreground class.
+}
+}
+\label{tab:acdc}
+\end{center}
+}
+\end{table*}

@@ -1,0 +1,155 @@
+\ProvidesPackage{dvmacros}[2017/02/22 v1.0 Davis Vigneault]
+
+\makeatletter
+\renewcommand*{\fps@figure}{tp}
+\makeatother
+
+\makeatletter
+\renewcommand*{\fps@table}{tp}
+\makeatother
+
+\newcommand{\captiontitle}{TITLE HAS NOT BEEN SET}
+
+% Data
+
+%% Macros
+%\newcommand{\ts}[1]{\textsuperscript{#1}}
+%\renewcommand{\st}{\textsuperscript{st}} % 1\st
+%\newcommand{\nd}{\textsuperscript{nd}}   % 2\nd
+%\newcommand{\rd}{\textsuperscript{rd}}   % 3\rd
+%\renewcommand{\th}{\textsuperscript{th}} % 4\th
+
+\newcommand{\norm}[1]{\left\Vert #1 \right\Vert}
+
+% Abbreviations
+\newcommand{\LV}{LV}
+\newcommand{\RV}{RV}
+\newcommand{\LA}{LA}
+\newcommand{\RA}{RA}
+\newcommand{\SA}{SA}
+\newcommand{\VLA}{2C}
+\newcommand{\HLA}{4C}
+\newcommand{\EF}{EF}
+\newcommand{\ARVC}{ARVC}
+\newcommand{\HCM}{HCM}
+\newcommand{\LVH}{LVH}
+\newcommand{\CMR}{CMR}
+\newcommand{\FTCMR}{FT-CMR}
+\newcommand{\CCT}{CCT}
+\newcommand{\ND}[1]{$#1$-D}
+\newcommand{\ED}{ED}
+\newcommand{\ES}{ES}
+\newcommand{\EDV}{EDV}
+\newcommand{\ESV}{ESV}
+\newcommand{\SQUEEZ}{SQUEEZ}
+\newcommand{\SPAMM}{SPAMM}
+\newcommand{\SSFP}{SSFP}
+\newcommand{\MICSR}{MICSR}
+\newcommand{\RF}{RF}
+\newcommand{\GRE}{GRE}
+\newcommand{\CSPAMM}{CSPAMM}
+\newcommand{\HARP}{HARP}
+\newcommand{\SENC}{SENC}
+\newcommand{\DENSE}{DENSE}
+\newcommand{\FFT}{FFT}
+%\newcommand{\SDI}{SDI}
+\newcommand{\CPD}{CPD}
+\newcommand{\AHA}{AHA}
+\newcommand{\MTT}{MTT}
+\newcommand{\SI}{SI}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator{\atantwo}{atan2}
+
+\newcommand{\SV}{SV}
+\newcommand{\CO}{CO}
+\newcommand{\BSA}{BSA}
+\newcommand{\BMI}{BMI}
+\newcommand{\HR}{HR}
+\newcommand{\BP}{BP}
+\newcommand{\BNP}{BNP}
+\newcommand{\WT}{WT}
+\newcommand{\MWT}{MWT}
+\newcommand{\ICC}{ICC}
+\newcommand{\TFC}{TFC}
+
+% Notation
+\newcommand{\fourier}{\mathcal{F}}
+\newcommand{\ifourier}{\fourier^{-1}}
+\newcommand{\lag}{\varepsilon}
+\newcommand{\eul}{\epsilon}
+\newcommand{\Lag}{E_L}
+\newcommand{\Eul}{E_E}
+
+\newcommand{\Real}{\mathbb{R}}
+\newcommand{\Complex}{\mathbb{C}}
+\newcommand{\Natural}{\mathbb{N}}
+\newcommand{\Integer}{\mathbb{Z}}
+
+\newcommand{\disp}{\mathbf{u}}
+\newcommand{\wrap}{\mathcal{W}}
+\newcommand{\SD}{\sigma}
+\newcommand{\Dim}{n}
+
+\newcommand{\NumCP}{C}
+\newcommand{\CPIndex}{c}
+\newcommand{\PatchIndex}{j}
+\newcommand{\NumFrames}{K}
+\newcommand{\tribspline}{\mathbf{b}}
+
+\newcommand{\DefGT}{F} % Deformation Gradient Tensor
+\newcommand{\Eye}{I} % Identity Matrix
+\newcommand{\gyro}{\gamma}
+
+\newcommand{\pd}[2]{\displaystyle \frac{\partial #1}{\partial #2}}
+
+\newcommand{\Bezier}{B\'{e}zier}
+
+\newcommand{\pa}{*}
+\newcommand{\pb}{\dagger}
+\newcommand{\pc}{\ddag}
+
+\newcommand{\UOne}{s}
+\newcommand{\UTwo}{t}
+\newcommand{\FrameIndex}{f}
+\newcommand{\CNN}{CNN}
+\newcommand{\ANOVA}{ANOVA}
+\newcommand{\ctsd}{cTSD}
+\newcommand{\IoU}{IoU}
+\newcommand{\SGD}{SGD}
+\newcommand{\FT}{FT}
+\newcommand{\DC}{DC}
+\newcommand{\UNet}{U-Net}
+
+\newcommand{\IQR}{IQR}
+\newcommand{\iqr}[4]{$ #2 \mathrm{#4}, \mathrm{IQR} = \left[ #1 \mathrm{#4}, #3 \mathrm{#4} \right] $}
+
+%\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\sgn}{sgn}
+
+\newcommand{\FPR}{FPR}
+\newcommand{\FNR}{FNR}
+\newcommand{\STN}{STN}
+\newcommand{\TEE}{TEE}
+\newcommand{\TTE}{TTE}
+\newcommand{\TDI}{TDI}
+\newcommand{\MSE}{MSE}
+
+\newcommand{\twodots}{\mathrel{{.}\,{.}}\nobreak}
+
+
+\newcommand{\image}{I}
+\newcommand{\timage}{I^\prime}
+\newcommand{\tparams}{\bm{m}}
+\newcommand{\tmat}{M}
+\newcommand{\trans}{\mathcal{T}}
+\newcommand{\ReLU}{ReLU}
+\newcommand{\LocNet}{LocNet}
+\newcommand{\MSWE}{MSWE}
+\newcommand{\CCE}{\mathcal{H}}
+\newcommand{\omeganet}{$\Omega$-Net}
+
+\newcommand{\bestnetwork}{Network D}
+
+\newcommand{\hcmdata}{HCMNet}
+\newcommand{\miccaidata}{ACDC}

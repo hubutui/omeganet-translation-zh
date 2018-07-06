@@ -1,0 +1,45 @@
+In this work, we have presented the \omeganet{}: a novel deep convolutional neural network (\CNN{}) architecture for \hl{localization}, orientation alignment, and segmentation.
+We have applied this network to the task of fully automatic whole-heart segmentation and simultaneous transformation into the ``canonical'' clinical view, 
+which has the potential to greatly simplify downstream analyses of \SSFP{} \CMR{} images.
+The network was trained end-to-end from scratch to segment five foreground classes (the four cardiac chambers plus the \LV{} myocardium) in three views (\SA{}, \HLA{}, 
+and \VLA{}), without providing prior knowledge of the view being segmented.
+The dataset was highly heterogeneous from the standpoint of anatomical variation, including both healthy subjects and patients with overt hypertrophic cardiomyopathy.
+Data was acquired from both 1.5-T and 3-T magnets as part of a multicenter trial involving 10 institutions.
+In cross-validation experiments, the network performed well in predicting both the parameters of the transformation, and the cardiac segmentation.
+
+\hl{
+\omeganet{} also achieved state-of-the-art performance on the publicly available 2017 MICCAI \miccaidata{} dataset in two of three classes.
+Compared with our internal HCMNet dataset, \miccaidata{} contains a broader range of \LV{} and \RV{} pathologies, but only one clinical view, and fewer foreground classes.
+Moreover, HCMNet was a multicenter study, whereas \miccaidata{} was acquired at a single center.
+It is encouraging that \omeganet{} performed well on both datasets.
+
+The prior state-of-the-art \citep{Isensee2017,Isensee2018} was achieved using an ensemble of 2D and 3D \UNet{}-inspired architectures, optimized for \emph{stacked} cine series.
+Their method is therefore not generally applicable to \HLA{} and \VLA{} views, which are typically acquired as single slices.
+Therefore, \omeganet{} outperformed \citet{Isensee2018} while remaining more general, and while providing \hl{localization} and orientation information not predicted by \citep{Isensee2017}.
+}
+
+The work is novel in \hl{four} principal ways.
+First, this network predicts five foreground classes in three clinical views, which is a substantially more difficult problem than has been addressed previously in the literature \citep{Vigneault2017}.
+Second, a spatial transformer network module \citep{Jaderberg2015} was used to rotate each view into a canonical orientation.
+\hl{
+\CNN{}s are neither rotation invariant nor equivariant, nor scale invariant.
+From a technical standpoint, in theory this shortcoming can be addressed by acquiring very large datasets which adequately represent all possible rotations.
+However, biomedical imaging datasets are expensive and time consuming both to acquire and to annotate, directly motivating this design decision.
+By standardizing the orientation of the input to the \hl{final} segmentation module, we simplify the task of both the downstream network and the physician interpreting the images.}
+Third, the proposed architecture takes loose inspiration from the cascaded classifier models proposed by \citet{Viola2001}, in that \UNet{} $0$ performs \hl{initial} segmentation (in order to predict transformation parameters), and the transformed image is then provided as input to a \hl{final} segmentation module (\UNet{}s $1$, $2$, and $3$).
+\hl{
+Last, by its design, \omeganet{} provides human-interpretable, intermediate outputs (an \hl{initial} segmentation and transformation parameters) in addition to the \hl{final} segmentation.
+In doing so, we substantially increase the complexity and information predicted by the network compared to the \UNet{} architecture, but without adding concerns that \CNN{}s are ``black boxes'' whose internals cannot be adequately interrogated.
+}
+
+Although the dataset included three orthogonal cardiac planes and both healthy \hl{subjects and those with \LV{} pathology}, there remain potential opportunities to extend the dataset to more general scenarios.
+First, other cardiac planes used in clinical practice (such as the axial, three-chamber, and \RV{} long axis views) should be added in future work.
+It would also be useful and interesting to test this on other \CMR{} pulse sequences (such as gradient echo) and on additional modalities (i.e., cardiac computed tomography and echocardiography).
+Moreover, it could also be interesting to apply this technique to other areas within biomedical image segmentation where \hl{localization}, reorientation, and segmentation are useful, such as in fetal imaging.
+\hl{
+Finally, we expect \omeganet{} to be useful in applications requiring the segmentation of multiple clinical planes, such as \CMR{} motion correction and slice alignment \citep{Sinclair2017}.
+}
+
+A variety of opportunities present themselves in terms of optimizing the \omeganet{} architecture.
+For example, the network was trained to segment individual image frames, without spatial or temporal context; modifying the architecture to allow information sharing between temporal frames and spatial slices has the potential to increase accuracy and consistency.
+The E-Net (``Efficient Net'') provides modifications to the \UNet{} blocks which increase computational and memory efficiency, while preserving accuracy \citep{Paszke2016}; these lessons have been applied successfully to cardiac segmentation \citep{Lieman-Sifry2017}, and could theoretically be applied here as well.

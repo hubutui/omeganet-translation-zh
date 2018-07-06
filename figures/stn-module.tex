@@ -1,0 +1,16 @@
+\renewcommand{\captiontitle}{Spatial transformer network module}
+\begin{figure}
+\begin{center}
+
+\begin{tikzpicture}
+\node [anchor=south west] (image) at (0,0) {\includegraphics[width=0.5\textwidth]{./data/sampler.png}};
+\draw [decorate,decoration={brace,amplitude=10pt},xshift=0pt,yshift=0pt](2.8,1.317) -- (1.25,1.85) node [black,midway,xshift=-0.3cm,yshift=-0.7cm] {\footnotesize $\image_2 = \trans(\image, T)$};
+\draw [decorate,decoration={brace,amplitude=10pt},xshift=0pt,yshift=0pt](4.35,0.783) -- (2.8,1.317) node [black,midway,xshift=-0.3cm,yshift=-0.7cm] {\footnotesize $\image_3 = \trans(\image_2, R)$};
+\draw [decorate,decoration={brace,amplitude=10pt},xshift=0pt,yshift=0pt](5.9,0.25) -- (4.35,0.783) node [black,midway,xshift=-0.3cm,yshift=-0.7cm] {\footnotesize $\trans(\image_3, S)$};
+\end{tikzpicture}
+
+\caption[\captiontitle]{\captiontitle{}.  Note that in the actual implementation, all transformations are performed relative to the input image $\image$ (i.e., $\trans(\image, T)$, $\trans(\image, RT)$, and $\trans(\image, SRT)$); for clarity, the transformations have been presented here as successive steps.}
+\label{fig:stn-module}
+\end{center}
+\end{figure}
+

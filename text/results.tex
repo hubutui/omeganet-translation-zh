@@ -1,0 +1,94 @@
+\subsection{\hl{HCMNet dataset}}
+
+\input{\tabdir table_2.tex}
+
+\subsubsection{\hl{Segmentation}}
+
+Weighted foreground \IoU{} was calculated separately for each image, and the median and interquartile range (\IQR{}) of all predictions is reported.
+As accuracy is not necessarily the same across all clinical planes, the performance of the four networks relative to manual segmentation is reported for all views combined, and also for each clinical plane separately (Table~\ref{tab:architectureaccuracy}).
+
+\input{\figdir hourglass-accuracy.tex}
+
+It is instructive to examine intermediate network performance at each successive \UNet{} (Fig.~\ref{fig:hourglass-accuracy}).
+
+\begin{itemize}
+\item Although Network A contains the most parameters, adding the \hl{final} segmentation module \hl{was found to increase} network performance \emph{at the level of the \hl{initial} \UNet{}} compared with Network A; 
+i.e., the performance of the \hl{initial} segmentation module \UNet{} (\UNet{} $0$) is $\approx~0.007$ higher in Networks B and C compared with Network A, 
+and $\approx~0.003$ higher in Network D compared with Networks B and C.
+\item There \hl{wa}s a substantial increase in performance between the \hl{initial} and \hl{final} segmentation \UNet{}s, i.e., \UNet{}s 0 and 1 ($\approx~0.016$, $\approx~0.015$, and $\approx~0.012$ increases for Networks B, C, and D, respectively) .
+\item In Networks C and D, there \hl{wa}s not a substantial increase in performance between successive \UNet{}s in the \hl{final} segmentation module.
+\end{itemize}
+
+\input{\figdir histograms.tex}
+
+As performance is likely to differ between structures, image\hl{-}wise histograms of foreground \IoU{} are plotted for the best performing network (\bestnetwork{}) for each structure and clinical plane (Fig.~\ref{fig:histograms}).
+In all three clinical planes, performance is worst for the \LV{} myocardium, best \hl{for} the \LV{} blood pool, and intermediate \hl{for} the remaining structures.
+\hl{Intuitively, r}elatively poor \LV{} myocardial segmentation performance can be understood by considering that segmentation error is concentrated primarily at the structure boundaries.
+Therefore, structures with a high ratio of perimeter-to-area (such as the \LV{} myocardium, which has both an internal and external perimeter, i.e., endocardium and epicardium) are predisposed to perform poorly.
+A number of factors may contribute to the superior performance of \LV{} bloodpool segmentation.
+
+\begin{itemize}
+\item The \LV{} myocardium provides a high-contrast boundary along much of the perimeter of the \LV{} bloodpool.
+\item Compared with other cardiac chambers, the \LV{} bloodpool has relatively less anatomical variation between subjects.
+\item The three orthogonal planes examined in this study are all defined relative to the left ventricle; therefore, the appearance \hl{of} the \LV{} is more consistent between subjects.
+\end{itemize}
+
+\hl{
+Fig.~\ref{fig:roc} presents the precision-recall curve, showing the ``success rate'' (vertical axis) defined as the fraction of cases in which weighted foreground \IoU{} exceeded a varying threshold varying from $0.4$ to $1.0$ (horizontal axis).
+The resulting precision-recall curve had an area under the curve (AUC) of \AUC{}, demonstrating the accuracy of the \omeganet{}.
+The ``failure rate'' can also be calculated from this curve as $1 - \mathrm{success rate}$.
+For example, for a conservative definition of failure as weighted foreground \IoU{} $< 0.9$, the failure rate is approximately $1\%$.
+}
+
+Representative segmentations produced by \bestnetwork{} in all views are shown for healthy control subjects in Fig.~\ref{fig:representative-results-control} and for patients with overt \HCM{} in Fig.~\ref{fig:representative-results-overt}.
+Note that the ground truth segmentations have been transformed by the predicted parameters rather than the ground truth parameters in order to aid interpretation \hl{in these figures}.
+The network successfully transformed the images into the canonical orientation for all cases shown.
+Notably, the myocardial segmentation consistently excludes papillary muscles and myocardial trabeculation.
+Moreover, the network appears to reliably identify the atrioventricular valve plane in the long axis views, which is a useful result deserving of attention in future work.
+
+\input{\figdir roc.tex}
+\input{\figdir representative-results-control.tex}
+\input{\figdir representative-results-overt.tex}
+
+\subsubsection{Transformation parameters}
+
+\input{\figdir matrix-loss.tex}
+
+Ground truth parameters were compared to those predicted by the best performing network (\bestnetwork{}) via correlation, and by Bland Altman plots \hl{(Fig.~\ref{fig:matrix-loss})}.
+It is notable that ground truth transformation parameters (particularly rotation and scale) were not uniformly distributed between views.
+Nonrandom rotation is to be expected from the fact that the positioning of the patient in the scanner, the protocol for determining imaging planes, the placement of the heart in the chest, and the relationship between imaging planes are all themselves nonrandom; nonrandom scale is likewise to be expected from the variable size of the anatomical structures visible in each view.
+
+Predicted horizontal translation, vertical translation, and rotation parameters were all highly correlated with ground truth ($R \approx~0.95$, $p < 0.0001$ for all), with the predicted parameters slightly under-estimating the ground truth (slope $\approx~0.87$ for all).  \hl{S}ystematic bias was \hl{not} evident on visual inspection of the Bland-Altman plots; $95\%$ of translation errors were within $\pm 0.07$ (in normalized image coordinates), and $95\%$ of rotation errors were within $\pm 0.63$ (in radians).
+Of the $5\%$ of cases which were outside these bounds, the vast majority were long axis (\HLA{} or \VLA{}) views.
+This is perhaps not surprising since each patient contributed three \SA{} views, but only two long axis views.
+
+Compared with translation and rotation, correlation between ground truth and predicted scale was slightly lower, though still good ($R = 0.88$, $p < 0.0001$); predicted scale again slightly underestimated ground truth scale ($s = 0.71\hat{s} + 0.16$).
+There \hl{wa}s a marked decrease in network performance above approximately $\hat{s} = 0.7$.
+This may indicate the importance of context information to the network\hl{.
+H}owever, it should be noted that the decrease in performance is accompanied by a sharp decrease in the frequency of cases, and so may also be the result of an insufficient number of samples in the dataset.
+
+
+\subsubsection{Failure cases}
+
+\input{\figdir failure.tex}
+
+Occasional failure cases were observed, a selection of which are shown in Fig.~\ref{fig:failure}.
+Each of these failure cases has one or more features which could logically explain the failure.
+The leftmost column shows an apical \SA{} slice from a severely hypertrophied patient.
+Patients with such severe disease were relatively uncommon in the dataset, perhaps causing the network to split its attention between the heart and a second ``candidate structure'' (the cardia of the stomach).
+The center-left column shows a second apical \SA{} slice from a different subject, where the right ventricle was incorrectly segmented.
+The signal intensity in this image was low relative to the other patients in the cohort, resulting in a very high contrast image after histogram equalization.
+The center-right and rightmost columns show long axis views from a patient with a particularly high resolution scan, where the heart occupies the vast majority of the image, with very little context information.
+In both cases, catastrophic segmentation error follows failure to properly reorient the image into a canonical orientation.
+However, it should be emphasized that this post hoc reasoning is speculative; we cannot state a definitive causal relationship between these features and the resulting failures.
+
+
+\hl{
+\subsection{2017 MICCAI \miccaidata{} dataset}
+\input{\tabdir acdc.tex}
+\citet{Isensee2017} represents the state-of-the-art network in terms of segmentation accuracy on the \miccaidata{} leaderboard; this same group has since released an unpublished revision\footnote{https://arxiv.org/abs/1707.00587v2} with improved results \citep{Isensee2018}.
+To match their methods, we retrained the Network B variant of \omeganet{} from scratch using five-fold cross-validation on the provided dataset~(each patient only appears in \emph{one} fold).
+Single model segmentation accuracy is reported for \omeganet{}, \citet{Isensee2017}, and \citet{Isensee2018} in Table~\ref{tab:acdc}.
+Compared with \citet{Isensee2017}, our results give higher \IoU{} for all foreground classes: \LV{} bloodpool ($\ACDCONJLVBP{}$ vs $\ACDCFIOJLVBP{}$), \RV{} bloodpool ($\ACDCONJRVBP{}$ vs $\ACDCFIOJRVBP{}$), and \LV{} myocardium ($\ACDCONJLVMY{}$ vs $\ACDCFIOJLVMY{}$).
+Compared with \citet{Isensee2018}, our results give higher \IoU{} for \LV{} bloodpool ($\ACDCONJLVBP{}$ vs $\ACDCFINJLVBP{}$) and \RV{} bloodpool ($\ACDCONJRVBP{}$ vs $\ACDCFINJRVBP{}$), but lower \IoU{} for \LV{} myocardium ($\ACDCONJLVMY{}$ vs $\ACDCFINJLVMY{}$).
+}

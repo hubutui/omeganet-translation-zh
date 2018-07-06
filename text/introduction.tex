@@ -1,0 +1,47 @@
+\input{\figdir omega-net-architecture.tex}
+
+Pixelwise segmentation of the left ventricular (\LV{}) myocardium and the four cardiac chambers in \ND{2} steady state free precession (\SSFP{}) cine sequences is an essential preprocessing step for volume estimation (e.g., ejection fraction, stroke volume, and cardiac output); morphological characterization (e.g., myocardial mass, regional wall thickness and thickening, and eccentricity); and strain analysis \citep{Peng2016}.
+However, automatic cardiac segmentation remains a notoriously difficult problem, given:
+
+\begin{itemize}
+\item Biological variability in heart size, orientation in the thorax, and morphology (both in healthy subjects and in the context of disease).
+\item Variability in contrast and image appearance with different scanners, protocols, and clinical planes.
+\item Interference of endocardial trabeculation and papillary muscles.
+\item Poorly defined borders between the ventricles and the atria, as well as between the chambers and the vasculature.
+\end{itemize}
+
+Three broad approaches have been employed to address this complexity.
+First, the scope of the problem can be restricted, i.e., to segmentation of the \LV{} myocardium and bloodpool in the \SA{} view only.
+Second, user interaction can be used to provide a sensible initialization, supply anatomical landmarks, or correct errors.
+Third, prior knowledge of cardiac anatomy may be incorporated into model-based approaches.  
+Clearly, none of these approaches is ideal: the first limiting the information which can be gleaned from the algorithm; the second being labor-intensive for the clinician; and the third requiring careful construction of algorithmic constraints.
+
+Recently, deep convolutional neural networks (\CNN{}s) have been \hl{proposed} to great effect both in \hl{natural} image classification \citep{Krizhevsky2012,Simonyan2015}, and segmentation \citep{Long2015,Noh2015,Yu2016}, \hl{as well as for} biomedical image analysis \citep{Ronneberger2015,Xie2015}.
+\CNN{} segmentation of short axis \CMR{} has been applied to the \LV{} blood-pool \citep{Tan2016,Poudel2016a,Tan2017}, the \RV{} blood-pool \citep{Luo2016}, and both simultaneously \citep{Tran2016,Lieman-Sifry2017,Vigneault2017}.
+In each of these methods, either \hl{localization} and segmentation \hl{were} performed separately \citep{Tan2016, Poudel2016a, Tan2017, Luo2016}, or \hl{the images were manually cropped such that the heart was in the image center and took up a majority of the image, obviating the \hl{localization} task} \hl{\citep{Tran2016, Lieman-Sifry2017, Vigneault2017}}.
+Neither end-to-end \hl{localization} and segmentation nor transformation into a canonical orientation prior to segmentation has been described.
+
+\input{\figdir canonical-orientation.tex}
+
+\hl{
+In the Deep Learning~(DL) literature, \CNN{}s were only designed to be invariant to small perturbations by average/max pooling.
+However, in essense, the square-windowed convolution~(correlation) operations have several limitations, e.g., they are neither rotation invariant nor equivariant, nor scale invariant, and therefore require large datasets representing all possible rotations and/or substanial data augmentations~\citep{Sifre2013, Dieleman2015}.
+}
+In this paper, we propose the \omeganet{} (Omega-Net), a novel \CNN{} architecture trained end-to-end to tackle three important tasks: \hl{localization}, transformation into a canonical orientation, and segmentation (Fig.~\ref{fig:omega-net-architecture}).
+
+For simplicity, we use the \UNet{} as the fundamental component of the \hl{initial} and \hl{final} segmentation modules \citep{Ronneberger2015}, though more advanced networks such as ResNet \citep{He2016} could be substituted in\hl{stead}.
+Inspired by the spatial transformer network \citep{Jaderberg2015}, we designed a fully differentiable architecture that \hl{simultaneously} achieves \hl{localization} and transformation into a canonical orientation.
+
+The transformed image is then fed into a \hl{final} segmentation module, which resembles the stacked hourglass architecture \citep{Newell2016}.
+\hl{
+In a stacked hourglass, segmentation is performed by stacking two or more \UNet{}-like modules in series, where the features learned by one \UNet{} serve as the input to its successor, and intermediate segmentations are predicted at the output of each \UNet{}.
+This architecture has been shown to produce progressively more accurate predictions, with diminishing returns at each stage \citep{Newell2016}.
+}
+
+We demonstrate that the \omeganet{} is capable of the fully automatic segmentation of five foreground classes (\LV{} myocardium, the left and right atria, and the left and right ventricles) in three orthogonal clinical planes (short axis, \SA{}; four-chamber, \HLA{}; and two-chamber, \VLA{}), with simultaneous rigid transformation of the input into a canonical orientation (defined separately for each view, Fig.~\ref{fig:canonical-orientation}).
+Moreover, the network is trained on a multicenter population \hl{\citep{Ho2017}} of patients with hypertrophic cardiomyopathy (\HCM{}), which increases the complexity of the problem due to the highly variable appearance of the \LV{} in these patients.
+\hl{N}etwork performance as measured by weighted foreground intersection-over-union (\IoU{}) was substantially improved in the best-performing \omeganet{} 
+compared with \UNet{} segmentation without \hl{localization} and orientation alignment ($0.858$ vs $0.834$).
+\hl{
+In addition, we retrained the network from scratch on the 2017 MICCAI Automated Cardiac Diagnosis Challenge (\miccaidata{}) dataset,\footnote{\url{https://www.creatis.insa-lyon.fr/Challenge/acdc/}} and achieved results which outperform the current state-of-the-art \citep{Isensee2018} in terms of \LV{} and \RV{} cavity segmentation, and perform slightly worse in terms of \LV{} myocardium segmentation.
+}
