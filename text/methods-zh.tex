@@ -6,7 +6,7 @@
 所谓的典型方向（\CMR{}）是针对不同的标准切面进行定义的（图 \ref{fig:canonical-orientation}）．
 我们提出的心脏 \SSFP{} 图像分割网络是端到端训练的，而且允许定位、对齐和分割任务互相影响促进．
 我们的模型由三个阶段组成．
-第一，将全尺寸的原始图像 $\image$ 输入到一个 \UNet{} 模块 \S \ref{sec:unet} 进行粗分割． 
+第一，将全尺寸的原始图像 $\image$ 输入到一个 \UNet{} 模块 (\S \ref{sec:unet}) 进行粗分割． 
 第二，利用 \UNet{} 中间（下采样）的特征来预测一个刚体仿射变换矩阵 $\tmat$，将图像变换到一个典型方向 $\timage = \trans(\image, \tmat)$ （\S\ref{sec:stn}）．
 第三，用一个堆叠的沙漏形模块（\S\ref{sec:hourglass}）对变换后的图像 $\timage$ 进行分割．
 以下小节将对每个模块进行详细的讨论．
@@ -182,7 +182,7 @@ L_{S_{H,d}} = -\frac{1}{HW} \sum_{\forall h,w} \CCE(P^{H,d}_{h,w}\hat{S}^\prime_
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{小结}
 
-小结一下，我们使用损失函数 \cref{eqn:unet-loss} 来训练 \omeganet{} 的粗分割模块；四个矩阵损失函数 \cref{eqn:attn-image-loss-t,eqn:attn-image-loss-s,eqn:attn-image-loss-r} 来训练变换模块；以及一到三个损失函数 \cref{eqn:hourglass-loss} 来训练最后的细分割模块．
+小结一下，我们使用损失函数公式 \ref{eqn:unet-loss} 来训练 \omeganet{} 的粗分割模块；四个矩阵损失函数公式 \ref{eqn:attn-image-loss-t}、\ref{eqn:attn-image-loss-r}和\ref{eqn:attn-image-loss-s}来训练变换模块；以及一到三个损失函数公式 \ref{eqn:hourglass-loss} 来训练最后的细分割模块．
 因此，总的损失函数就是：
 
 \begin{equation}

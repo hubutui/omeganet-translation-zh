@@ -16,8 +16,8 @@
 第三，将心脏结构的先验知识融合到模型中．
 显然，这些方法都不够理想：第一种方法限制了算法能够学习到的信息；第二种方法增加了医生的劳动；而第三种方法需要更加小心的设计算法． 
 
-近来，深度神经网络\hl{CNNs}在自然图像分类\hl{\citep{Krizhevsky2012,Simonyan2015}}和分割\citep{Long2015,Noh2015,Yu2016}以及生物医学图像分析\citep{Ronneberger2015,Xie2015}取得瞩目的成就．
-已有研究将 CNN 分割应用到短轴切面 CMR 图像的左室血池（\citep{Tan2016,Poudel2016a,Tan2017}），右室血池（\citep{Luo2016}），以及同时对前述两者分割（\citep{Tran2016,Lieman-Sifry2017,Vigneault2017}）．
+近来，深度神经网络（CNN）在自然图像分类 \citep{Krizhevsky2012,Simonyan2015} 和分割 \citep{Long2015,Noh2015,Yu2016} 以及生物医学图像分析 \citep{Ronneberger2015,Xie2015} 取得瞩目的成就．
+已有研究将 CNN 分割应用到短轴切面 CMR 图像的左室血池（\citep{Tan2016,Poudel2016a,Tan2017}，右室血池（\citep{Luo2016}，以及同时对前述两者分割（\citep{Tran2016,Lieman-Sifry2017,Vigneault2017}）．
 这些方法要么定位和分割是分别进行\citep{Tan2016, Poudel2016a, Tan2017, Luo2016}，要么是预先对图像进行裁剪，使得心脏就在图像中央，并占图像的主要部分，从而避开了定位任务\hl{\citep{Tran2016, Lieman-Sifry2017, Vigneault2017}}．他们都没有做端到端的定位和分割，也没有先变换到一个典型方向再做分割．
 
 \input{./figures/canonical-orientation-zh.tex}
