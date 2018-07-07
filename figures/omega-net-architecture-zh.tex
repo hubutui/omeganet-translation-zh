@@ -18,7 +18,7 @@
 \draw [decorate,decoration={brace,amplitude=10pt},xshift=0pt,yshift=0pt](0.4\tw,0.15\tw) -- (0.935\tw,0.15\tw) node [black,midway,xshift=0.0cm,yshift=+0.7cm] {(c) 细分割模块};
 \end{tikzpicture}
 
-\caption[\captiontitle]{\captiontitle{}.  (a) 将原始的 \SSFP{} 图像送入 \UNet{} 模块，得到一个粗分割输出 $S$．(b) 从该层 \UNet{} 中间（下采样）层输出的特征被用来给变换模块预测一个刚体仿射变换的参数 $\tmat$，该变换这可将输入图像变换到一个典型方向 $\image^\prime = \trans(\image, \tmat)$．(c) 这个变换后的图像就送入一个对堆叠的沙漏形网络对变换到典型方向的 $S^\prime$ 进行最后的细分割.需要说明的是，这里的所有模块都是从头开始端到端的训练的．}
+\caption[\captiontitle]{\captiontitle{}．(a) 将原始的 \SSFP{} 图像送入 \UNet{} 模块，得到一个粗分割输出 $S$．(b) 从该层 \UNet{} 中间（下采样）层输出的特征被用来给变换模块预测一个刚体仿射变换的参数 $\tmat$，该变换这可将输入图像变换到一个典型方向 $\image^\prime = \trans(\image, \tmat)$．(c) 这个变换后的图像就送入一个对堆叠的沙漏形网络对变换到典型方向的 $S^\prime$ 进行最后的细分割.需要说明的是，这里的所有模块都是从头开始端到端的训练的．}
 \label{fig:omega-net-architecture}
 \end{center}
 \end{figure*}
